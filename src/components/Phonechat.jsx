@@ -108,21 +108,12 @@ const Phonechat = () => {
       </div>
       <div className='  flex bg-white  px-[1%] py-[3%] m-[3%] rounded-3xl w-full'>
         <input placeholder='Type a Message' className='w-[80%] bg-stone-100 p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
-          {
-            !open?(
-                <img src={Emoji} alt="" className='w-[13%]' onClick={()=>setOpen((prev)=>(!prev))}/>
-            ):(
-                <div></div>
-            )
-          }
         
         <IconButton onClick={sendChat} className=''>
             <SendIcon className='bg-stone-100 w-[7%] '/>
         </IconButton>     
       </div>
-      {/* <div className='relative top-4'>
-       <EmojiPicker open={open} onEmojiClick={handleEmoji} />
-      </div> */}
+     
   </div>
 
       )
