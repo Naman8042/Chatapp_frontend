@@ -16,13 +16,13 @@ function Sidebar() {
     const[data,setData] = useState([]);
     useEffect(()=>{
     async function get(){
-    await axios.post("http://localhost:5000/user/fetchchats",{token :localStorage.getItem("token")})
+    await axios.post("https://chatapp-backend-hj9n.onrender.com/user/fetchchats",{token :localStorage.getItem("token")})
     .then((res)=>setData(res.data))
     }
     get()
     },[data])
   return (
-    <div className='w-[30%]'>
+    <div className=' w-full sm:w-[30%]'>
       <div className='flex justify-center bg-white px-[1%] py-[3%] m-[3%] rounded-3xl'>
         <div className='w-[30%]'>
         <IconButton>

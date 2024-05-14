@@ -1,7 +1,13 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import {IconButton} from '@mui/material'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import SearchIcon from '@mui/icons-material/Search';
 import React, { useEffect , useState, useRef} from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
-import {IconButton} from '@mui/material'
 import Messageself from './Messageself'
 import Messageother from './Messageother'
 import { useLocation } from 'react-router-dom';
@@ -13,9 +19,8 @@ import Emoji from '../assets/emoji.png'
 
 const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
-function Chatarea() {
-
-  const endRef = useRef(null)
+const Phonechat = () => {
+    const endRef = useRef(null)
   useEffect(()=>{
    endRef.current?.scrollIntoView({behaviour:"smooth"}) 
   },[])
@@ -74,22 +79,15 @@ function Chatarea() {
   }
   
   
-
   return (
-    <>
-    <div className='hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
-      <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
-      <div className='w-[90%] px-[3%] flex'>
-      <img src={Default} className='w-[10%]' alt=""/> 
-      <p className='w-[90%] text-start p-[1%] text-2xl'>{name}</p>
+    <div className=' absolute w-[95%] py-[2%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
+    <div  className=' h-[90%] w-[100%] bg-white rounded-xl overflow-y-hidden overflow-x-hidden'>
+      <div className='mb-[4%] border-b-2 flex justify-center items-center p-[1%]'>
+      <div className='w-[20%]'>
+      <img src={Default} className='w-full' alt="" /> 
+      </div>
+      <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
       </div> 
-      <div className='w-[10%] flex justify-center'>
-        <IconButton>
-            <DeleteIcon/>
-        </IconButton>
-      </div>
-      </div>
-      <div  className=' h-[80%] w-[100%] bg-white rounded-xl p-[2%] overflow-y-scroll overflow-x-hidden'>
       {
         conversation
         .slice(0)
@@ -108,21 +106,26 @@ function Chatarea() {
       }
       <div ></div>
       </div>
-      <div className=' h-[10%] w-[100%] bg-white rounded-xl flex '>
-        <input placeholder='Type a Message' className='w-[95%] bg-stone-100 p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
-        <div>
-          <img src={Emoji} alt="" className='w-[10%]' onClick={()=>setOpen((prev)=>(!prev))}/>
-          <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
-        </div>
+      <div className='  flex bg-white  px-[1%] py-[3%] m-[3%] rounded-3xl w-full'>
+        <input placeholder='Type a Message' className='w-[80%] bg-stone-100 p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
+          {
+            !open?(
+                <img src={Emoji} alt="" className='w-[13%]' onClick={()=>setOpen((prev)=>(!prev))}/>
+            ):(
+                <div></div>
+            )
+          }
+        
         <IconButton onClick={sendChat} className=''>
-            <SendIcon className='bg-stone-100 w-[5%] '/>
+            <SendIcon className='bg-stone-100 w-[7%] '/>
         </IconButton>     
       </div>
-    </div>
-    
-   
-    </>
-  )
+      {/* <div className='relative top-4'>
+       <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+      </div> */}
+  </div>
+
+      )
 }
 
-export default Chatarea
+export default Phonechat

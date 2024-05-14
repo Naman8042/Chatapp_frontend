@@ -8,7 +8,7 @@ function Online() {
   const[users,setUsers] = useState([])
   useEffect(()=>{
    try{
-    axios.post("http://localhost:5000/user/getall",{token:localStorage.getItem("token")})
+    axios.post("https://chatapp-backend-hj9n.onrender.com/user/getall",{token:localStorage.getItem("token")})
     .then((res)=>setUsers(res.data))
    }
    catch(err){

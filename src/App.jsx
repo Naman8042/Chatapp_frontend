@@ -7,6 +7,7 @@ import Chatarea from './components/Chatarea'
 import Online from './components/Online'
 import Creategroup from './components/Creategroup'
 import Adduser from './components/Adduser'
+import Phonechat from './components/Phonechat'
 
 function App() {
   const[conversation,setConversation] =useState(
@@ -28,6 +29,7 @@ function App() {
           <Route path="addusers" element={<Adduser/>}/>
           <Route path="create-groups" element={<Creategroup/>}/>
         </Route>
+        <Route path="/chat" element={<Phonechat/>}/>
       </Routes>
       
     </div>
