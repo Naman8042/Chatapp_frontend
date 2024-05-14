@@ -15,7 +15,7 @@ const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 const Phonechat = () => {
   const endRef = useRef(null);
-  const [conversation, setConversation] = useState([]); // Moved useState up
+  const [conversation, setConversation] = useState([]); 
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +53,7 @@ const Phonechat = () => {
   useEffect(() => {
     socket.on("message received", (newMessageReceived) => {
       console.log(newMessageReceived);
-      setConversation([...conversation, newMessageReceived]); // Add new message to conversation
+      setConversation([...conversation, newMessageReceived]); 
       setConnected(false);
     });
   }, []);
@@ -81,7 +81,7 @@ const Phonechat = () => {
   return (
     <div className=' sm:hidden w-[95%]  bg-white py-[2%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
       <div className=' h-[90%] w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
-        <div className='mb-[4%] border-b-2 flex justify-center items-center p-[1%]'>
+        <div className='mb-[4%] fixed w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
             <img src={Default} className='w-full' alt="" />
           </div>
