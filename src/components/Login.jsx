@@ -9,7 +9,7 @@ function Login() {
   const[password,setPassword] = useState("")
   async function Login(){
     try{
-      axios.post("http://localhost:5000/user/login",{name,password})
+      axios.post("https://chatapp-backend-hj9n.onrender.com/user/login",{name,password})
       .then((res)=>{localStorage.setItem("token",res.data.token)
       ,localStorage.setItem("id",res.data._id)
       navigate("/app/welcome")
