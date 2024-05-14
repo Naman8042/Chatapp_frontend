@@ -19,10 +19,6 @@ function Maincontainer() {
     <div className='w-[90%] bg-stone-50 h-[90%] flex'>
     <Sidebar/>
     <Outlet/>
-    {/* <Chatarea props={conversation}/> */}
-    {/* <Welcome/> */}
-    {/* <Creategroup/> */}
-    {/* <Online/> */}
     </div>
   )
 }

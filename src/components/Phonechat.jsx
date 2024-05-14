@@ -1,12 +1,6 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {IconButton} from '@mui/material'
-import LightModeIcon from '@mui/icons-material/LightMode'
-import SearchIcon from '@mui/icons-material/Search';
 import React, { useEffect , useState, useRef} from 'react'
-import DeleteIcon from '@mui/icons-material/Delete';
+import { IoMdSend } from "react-icons/io";
 import SendIcon from '@mui/icons-material/Send';
 import Messageself from './Messageself'
 import Messageother from './Messageother'
@@ -80,14 +74,15 @@ const Phonechat = () => {
   
   
   return (
-    <div className=' absolute w-[95%] py-[2%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
-    <div  className=' h-[90%] w-[100%] bg-white rounded-xl overflow-y-hidden overflow-x-hidden'>
+    <div className=' sm:hidden w-[95%]  bg-white py-[2%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
+    <div  className=' h-[90%] w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
       <div className='mb-[4%] border-b-2 flex justify-center items-center p-[1%]'>
       <div className='w-[20%]'>
       <img src={Default} className='w-full' alt="" /> 
       </div>
       <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
       </div> 
+      <div className='flex  flex-col'>
       {
         conversation
         .slice(0)
@@ -104,13 +99,13 @@ const Phonechat = () => {
         })
         
       }
-      <div ></div>
       </div>
-      <div className='  flex bg-white  px-[1%] py-[3%] m-[3%] rounded-3xl w-full'>
-        <input placeholder='Type a Message' className='w-[80%] bg-stone-100 p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
+      </div>
+      <div className='flex fixed bottom-1 px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
+        <input placeholder='Type a Message' className='w-[80%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
         
-        <IconButton onClick={sendChat} className=''>
-            <SendIcon className='bg-stone-100 w-[7%] '/>
+        <IconButton onClick={sendChat} className='w-[20%] bg-white'>
+            <IoMdSend size={30} color='white'/>
         </IconButton>     
       </div>
      
