@@ -18,7 +18,7 @@ const Phonechat = () => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [conversation]); 
+  },[conversation]); 
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -63,7 +63,7 @@ const Phonechat = () => {
 
   async function sendChat() {
     try {
-      endRef.current?.scrollIntoView({ behavior: "smooth" });
+     
       const { data } = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage", {
         token: localStorage.getItem("token"),
         chatId: id,
@@ -86,7 +86,7 @@ const Phonechat = () => {
           </div>
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
         </div>
-        <div className='flex  flex-col'>
+        <div className='flex  flex-col pt-[20%]'>
           {
             conversation
               .slice(0)
