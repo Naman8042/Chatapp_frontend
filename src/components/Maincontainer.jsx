@@ -16,10 +16,16 @@ function Maincontainer() {
     
 )
   return (
-    <div className='w-[90%] bg-stone-50 h-[90%] flex'>
+    <>
+    <div className='hidden sm:flex w-[90%] bg-stone-50 h-[90%] '>
     <Sidebar/>
     <Outlet/>
     </div>
+    <div className='block sm:hidden'>
+      <Outlet/>
+    </div>
+    
+    </>
   )
 }
 
