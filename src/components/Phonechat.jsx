@@ -1,7 +1,6 @@
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState, useRef } from 'react';
 import { IoMdSend } from "react-icons/io";
-import SendIcon from '@mui/icons-material/Send';
 import Messageself from './Messageself';
 import Messageother from './Messageother';
 import { useLocation } from 'react-router-dom';
@@ -64,6 +63,7 @@ const Phonechat = () => {
 
   async function sendChat() {
     try {
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
       const { data } = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage", {
         token: localStorage.getItem("token"),
         chatId: id,
@@ -71,7 +71,6 @@ const Phonechat = () => {
       });
       setContent("");
       socket.emit("new message", data, localStorage.getItem("id"));
-
     }
     catch (err) {
       console.log(err);
