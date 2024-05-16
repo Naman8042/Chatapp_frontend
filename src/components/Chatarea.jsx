@@ -72,7 +72,22 @@ function Chatarea() {
 
     }
   }
-  
+  async function sendChatbyenter(event){
+    try{
+      if (event.key === 'Enter') {
+        const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
+      token:localStorage.getItem("token"),
+      chatId:id,
+      content:content
+     })
+     setContent("")
+     socket.emit("new message",data,localStorage.getItem("id"))
+      }
+    }
+    catch(err){
+
+    }
+  }
   
 
   return (
@@ -114,7 +129,7 @@ function Chatarea() {
           <img src={Emoji} alt="" className='w-[10%]' onClick={()=>setOpen((prev)=>(!prev))}/>
           <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
         </div>
-        <IconButton onClick={sendChat} className=''>
+        <IconButton onClick={sendChat} onKeyDown={sendChatbyenter} className=''>
             <SendIcon className='bg-stone-100 w-[5%] '/>
         </IconButton>     
       </div>

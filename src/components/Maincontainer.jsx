@@ -17,7 +17,7 @@ function Maincontainer() {
 )
   return (
     <>
-    <div className='hidden sm:flex w-[90%] bg-stone-50 h-[90%] '>
+    <div className='hidden sm:flex w-[90%] bg-stone-50 h-[90%] rounded-xl '>
     <Sidebar/>
     <Outlet/>
     </div>
