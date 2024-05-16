@@ -30,7 +30,8 @@ function Chatarea() {
   const id  = location.state.id;
   const name  = location.state.name;
   const users = location.state.users
-
+  const length = location.state.length
+  // console.log(users.length)
   useEffect(()=>{
     socket = io(ENDPOINT)
     socket.emit("setup",senderId)
@@ -50,7 +51,6 @@ function Chatarea() {
       })
     
   },[conversation])
-  
   useEffect(()=>{
     socket.on("message recieved",(newMessagerecieved)=>{
       console.log(newMessagerecieved)
@@ -101,12 +101,19 @@ function Chatarea() {
       <p className='w-[90%] text-start p-[1%] text-2xl ml-2 font-bold'>{name}</p>
       <div className='flex gap-1 ml-2 '>
       {
-        users.map((user)=>(
-          <div>
-            {user.name},
-          </div>
-        ))
+        length>0?(
+          
+            users.map((user)=>(
+             <div>
+               {user.name},
+             </div>
+           ))
+         
+        ):(
+          <div></div>
+        )
       }
+      
       </div>
       </div>
       </div> 

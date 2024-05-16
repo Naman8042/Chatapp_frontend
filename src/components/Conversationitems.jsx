@@ -23,14 +23,14 @@ function Conversationitems({props}) {
   return (
     
      <>
-     <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("chat" , {state:{id:props._id,name:name}})}} >
+     <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0}})}} >
       <div className='w-[30%]'><img src={Default} className='w-[100%]' alt=""/></div>
       <div className='w-[70%] px-[3%] flex flex-col justify-center'>
       <p className='text-lg font-semibold'>{name}</p>
       <p className='text-sm'>{content}</p>
       </div>
       </div>
-      <div className='flex sm:hidden border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name}})}} >
+      <div className='flex sm:hidden border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name,length:0}})}} >
       <div className='w-[30%]'><img src={Default} className='w-[100%]' alt=""/></div>
       <div className='w-[70%] px-[3%] flex flex-col justify-center'>
       <p className='text-lg font-semibold'>{name}</p>
