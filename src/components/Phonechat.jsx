@@ -78,9 +78,9 @@ const Phonechat = () => {
   }
 
   return (
-    <div className=' sm:hidden w-[95%]  bg-white py-[2%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
+    <div className=' sm:hidden w-[95%]  bg-white pb-[5%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
       <div className=' h-[90%] w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
-        <div className='mb-[4%] fixed top w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
+        <div className='mb-[4%] fixed top-0 w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
             <img src={Default} className='w-full' alt="" />
           </div>
