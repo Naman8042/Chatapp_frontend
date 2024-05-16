@@ -8,6 +8,7 @@ import Online from './components/Online'
 import Creategroup from './components/Creategroup'
 import Adduser from './components/Adduser'
 import Phonechat from './components/Phonechat'
+import Signup from './components/Signup'
 
 function App() {
   const[conversation,setConversation] =useState(
@@ -22,6 +23,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Login/>}/>
+        <Route path="signup" element={<Signup/>}/>
         <Route path="/app" element={<Maincontainer/>}>
           <Route path="welcome" element={<Welcome/>}/>
           <Route path="chat" element={<Chatarea/>}/>
