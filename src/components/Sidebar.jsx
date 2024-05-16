@@ -7,6 +7,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LightModeIcon from '@mui/icons-material/LightMode'
 import SearchIcon from '@mui/icons-material/Search';
+import { MdLogout } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Conversationgroup from './ConversationGroup'
@@ -40,7 +41,7 @@ function Sidebar() {
         <AddCircleIcon/>
         </IconButton>
         <IconButton>
-        <LightModeIcon/>
+        <MdLogout/>
         </IconButton>
         </div>
        </div>
