@@ -1,9 +1,5 @@
 import React,{useState} from 'react'
 import Sidebar from './Sidebar'
-import Chatarea from './Chatarea'
-import Welcome from './Welcome'
-import Creategroup from './Creategroup'
-import Online from './Online'
 import { Outlet } from 'react-router-dom'
 
 function Maincontainer() {

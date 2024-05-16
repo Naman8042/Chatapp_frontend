@@ -29,6 +29,8 @@ function Chatarea() {
 
   const id  = location.state.id;
   const name  = location.state.name;
+  const users = location.state.users
+
   useEffect(()=>{
     socket = io(ENDPOINT)
     socket.emit("setup",senderId)
@@ -89,14 +91,24 @@ function Chatarea() {
     }
   }
   
-
   return (
     <>
     <div className='hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
       <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
       <div className='w-[90%] px-[3%] flex'>
       <img src={Default} className='w-[10%]' alt=""/> 
-      <p className='w-[90%] text-start p-[1%] text-2xl'>{name}</p>
+      <div>
+      <p className='w-[90%] text-start p-[1%] text-2xl ml-2 font-bold'>{name}</p>
+      <div className='flex gap-1 ml-2 '>
+      {
+        users.map((user)=>(
+          <div>
+            {user.name},
+          </div>
+        ))
+      }
+      </div>
+      </div>
       </div> 
       <div className='w-[10%] flex justify-center'>
         <IconButton>

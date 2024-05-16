@@ -9,6 +9,7 @@ import Creategroup from './components/Creategroup'
 import Adduser from './components/Adduser'
 import Phonechat from './components/Phonechat'
 import Signup from './components/Signup'
+import Phonegroup from './components/Phonegroup'
 
 function App() {
   const[conversation,setConversation] =useState(
@@ -32,6 +33,7 @@ function App() {
           <Route path="create-groups" element={<Creategroup/>}/>
         </Route>
         <Route path="/chat" element={<Phonechat/>}/>
+        <Route path="/groupchat" element={<Phonegroup/>}/>
       </Routes>
       
     </div>

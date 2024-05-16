@@ -5,6 +5,8 @@ function Conversationitems({props}) {
   var name;
   var content="Start a New Chat";
   const navigate = useNavigate()
+  const users = props.users
+
   if(props.latestMessage!==undefined){
     if(props.latestMessage.content.length<30){
       content = props.latestMessage.content
@@ -23,13 +25,23 @@ function Conversationitems({props}) {
   return (
     
      
-      <div className='flex border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:props.chatName}})}} >
+      <>
+      <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%] ' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:props.chatName,users:users}})}} >
       <div className='w-[30%]'><img src={Default} className='w-[100%]' alt=""/></div>
       <div className='w-[70%] px-[3%]'>
-      <p className='text-lg'>{props.chatName}</p>
+      <p className='text-lg font-semibold'>{props.chatName}</p>
       <p className='text-sm'>{content}</p>
       </div>
       </div>
+      <div className='flex sm:hidden border-y-2 w-[100%] my-[0.5%] items-center ' onClick={()=>{navigate("/groupchat" , {state:{id:props._id,name:props.chatName,users:users}})}} >
+      <div className='w-[30%]'><img src={Default} className='w-[100%]' alt=""/></div>
+      <div className='w-[70%] px-[3%]'>
+      <p className='text-lg font-semibold'>{props.chatName}</p>
+      <p className='text-sm'>{content}</p>
+      </div>
+      </div>
+      
+      </>
     
   
   )
