@@ -20,7 +20,7 @@ function App() {
     }
   )
   return (
-    <div className="w-screen h-screen bg-stone-300 flex justify-center items-center">
+    <div className="w-screen h-full bg-stone-300 flex justify-center items-center">
 
       <Routes>
         <Route path="/" element={<Login/>}/>
