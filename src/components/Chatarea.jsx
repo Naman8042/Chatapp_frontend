@@ -5,27 +5,30 @@ import {IconButton} from '@mui/material'
 import Messageself from './Messageself'
 import Messageother from './Messageother'
 import { useLocation } from 'react-router-dom';
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from 'axios'
 import {io} from 'socket.io-client'
 import Default from '../assets/default.png'
 import EmojiPicker from 'emoji-picker-react'
 import Emoji from '../assets/emoji.png'
+import { IoSend } from "react-icons/io5";
 
 const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 function Chatarea() {
-
-  const endRef = useRef(null)
-  useEffect(()=>{
-   endRef.current?.scrollIntoView({behaviour:"smooth"}) 
-  },[])
-
   const senderId = localStorage.getItem("id")
   const[open,setOpen] = useState(false)
   const[conversation,setConversation] = useState([])
-  const[content,setContent] = useState()
+  const[content,setContent] = useState("")
   const[connected,setConnected] = useState(false)
   const location = useLocation();
+  const endRef = useRef(null)
+
+  useEffect(()=>{
+    endRef.current?.scrollIntoView({behaviour:"smooth"}) 
+  },[conversation])
+
+  
 
   const id  = location.state.id;
   const name  = location.state.name;
@@ -40,7 +43,7 @@ function Chatarea() {
     })
   },[])
   const handleEmoji = (e)=>{
-      setContent((prev)=>prev+e.emoji)
+    setContent((prev)=>prev+e.emoji)
   }
   useEffect(()=>{
     
@@ -93,9 +96,9 @@ function Chatarea() {
   
   return (
     <>
-    <div className='hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
+    <div className='relative hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
       <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
-      <div className='w-[90%] px-[3%] flex'>
+      <div className='w-[90%] px-[3%] flex items-center'>
       <img src={Default} className='w-[10%]' alt=""/> 
       <div>
       <p className='w-[90%] text-start p-[1%] text-2xl ml-2 font-bold'>{name}</p>
@@ -140,20 +143,25 @@ function Chatarea() {
         })
         
       }
-      <div ></div>
+      <div ref={endRef}/>
       </div>
-      <div className=' h-[10%] w-[100%] bg-white rounded-xl flex '>
-        <input placeholder='Type a Message' className='w-[95%] bg-stone-100 p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
-        <div>
-          <img src={Emoji} alt="" className='w-[10%]' onClick={()=>setOpen((prev)=>(!prev))}/>
-          <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
+      <div className=' w-full bg-whit rounded-xl flex items-center h-[10%]'>
+      <div className='w-[7%] flex items-center justify-center'>
+          <MdOutlineEmojiEmotions onClick={()=>setOpen((prev)=>(!prev))} className='sm:size-5 md:size-10' />
+          
         </div>
-        <IconButton onClick={sendChat} onKeyDown={sendChatbyenter} className=''>
-            <SendIcon className='bg-stone-100 w-[5%] '/>
-        </IconButton>     
+        <input placeholder='Type a Message' className='w-[85%] p-[1%] rounded-xl' value={content} onChange={(e)=>setContent(e.target.value)}/>
+        <div className='w-[8%] h-full  rounded-full flex items-center justify-center'>
+        <IconButton onClick={sendChat} onKeyDown={sendChatbyenter} >
+            <IoSend  size={50} color='white' className='bg-green-500 w-full p-3 rounded-full '/>
+        </IconButton>
+        </div>     
       </div>
+      
     </div>
-    
+    <div className='absolute bottom-[14%] left-[32.5%]'>
+      <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
+      </div>
    
     </>
   )
