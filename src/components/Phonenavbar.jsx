@@ -34,14 +34,14 @@ const Phonenavbar = () => {
         </IconButton>
         </div>
        </div>
-      <div className=' bg-white flex items-center px-[1%] py-[3%] my-[3%] w-[95%] rounded-3xl'>
+      {/* <div className=' bg-white flex items-center px-[1%] py-[3%] my-[3%] w-[95%] rounded-3xl'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
        className='b-none text-bg ml-[1%] p-[1%]'
        />
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -56,38 +56,37 @@ function Online() {
         }
       </div>
     </div>
-    <div className='w-screen sm:hidden'>
-      <Phonenavbar/>
-      <div className='flex h-[10%] w-full justify-center items-center '>
-      <span className='flex justify-center p-[1%] w-[50%]'><img src={Logo} alt="" className='w-[50%]'/></span>
-      <p className='  text-2xl font-bold w-[50%]'>Add Users</p>
-      </div>
-      <div className=' bg-white flex items-center px-[1%] py-[1%] m-[3%] rounded-3xl'>
+    <div className='w-screen block sm:hidden h-screen'>
+      <div className='h-[40%]'>
+        <div className='h-[30%]'><Phonenavbar/></div>
+        <div className='h-[80%]'>
+        <div className='flex '>
+       <span className='w-[50%] p-[1%]'><img src={Logo} alt="" className='w-24 h-24'/></span>
+       <p className='w-[50%] flex items-center text-2xl text-start'>Add Users</p>
+       </div>
+       <div className=' bg-white flex items-center px-[1%] py-[1%] m-[3%] rounded-3xl'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
        className='b-none text-bg ml-[1%] p-[1%]'
        />
+       </div>
+        </div>
       </div>
-      <div className='text-2xl my-[2%] w-[97%] flex flex-col items-center justify-center rounded-3xl'>
-        {
+      <div className='h-[60%] flex flex-col gap-4 items-center py-[2%] overflow-y-scroll'>
+      {
             users.map((user)=>(
-                <div className='flex p-[1%] gap-5 w-[100%] h-[10%] my-[1%] bg-white rounded-3xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[25%] flex justify-center '>
-                <img
-            alt="name"
-            src={Default}
-            className="h-16 mx-auto object-cover rounded-full w-16"
-          />
-                </div>  
-                <div className='w-[75%] flex items-center'>{user.name}</div>
+                <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
+                <div className='w-[20%]'><img src={Default} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
                 </div>
             ))
         }
       </div>
-    </div> 
+      </div>
+ 
     </>
   )
 }

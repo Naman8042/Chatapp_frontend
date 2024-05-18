@@ -55,19 +55,18 @@ function Creategroup() {
     </div>
     <button onClick={createGroup}>Create Group</button>
     </div>
-    <div className='sm:hidden w-screen'>
-       <Phonenavbar/>
-       <div className=' flex flex-col w-[100%] h-[100%]'>
-       <div className='w-[100%] h-[50%] flex flex-col gap-3 justify-end items-center '>
+    <div className='block sm:hidden w-screen h-screen'>
+      <div className='h-[10%] '><Phonenavbar/></div>
+      <div className=' flex flex-col w-[100%] h-[80%] p-[2%]'>
+      <div className='w-[100%] h-[30%] flex flex-col gap-3 justify-center items-center '>
       <input placeholder='Enter Group Name' className='p-[2%] rounded-2xl w-[80%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[2%] rounded-2xl w-[60%] w-[80%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>
-      
-    </div>
-    <div className='flex flex-col justify-center items-center gap-4 my-[5%]'>
+      </div>
+      <div className=' py-[5%] h-[70%] flex flex-col justify-center items-center gap-6  my-[5%] overflow-y-scroll'>
       {
         user.length>0?(
           user.map((users)=>(
-            <div className='w-[80%] text-center text-xl bg-stone-100 p-[1%] rounded-xl' onClick={()=>Adduser(users._id)}>{users.name}</div>
+            <div className='bg-white w-full py-[2%] text-center rounded-xl font-semibold text-xl' onClick={()=>Adduser(users._id)}>{users.name}</div>
           ))
         ):(
           <div>
@@ -76,11 +75,11 @@ function Creategroup() {
         )
       } 
     </div>
-    <div className='flex justify-center'>
-    <button className='bg-black text-white p-[2%] rounded-xl' onClick={createGroup}>Create Group</button>
+    </div>
+    <div className='flex justify-center h-[10%]'>
+    <button className='bg-black text-white m-[3%] px-[2%] rounded-xl' onClick={createGroup}>Create Group</button>
     </div>
     </div>
-      </div>
     </>
   )
 }

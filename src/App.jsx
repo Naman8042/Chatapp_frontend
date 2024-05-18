@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react'
 import Maincontainer from './components/Maincontainer'
 import Login from './components/Login'
@@ -11,6 +12,7 @@ import Phonechat from './components/Phonechat'
 import Signup from './components/Signup'
 import Phonegroup from './components/Phonegroup'
 
+
 function App() {
   const[conversation,setConversation] =useState(
     {
@@ -20,7 +22,7 @@ function App() {
     }
   )
   return (
-    <div className="w-screen h-full sm:h-screen bg-stone-300 flex justify-center items-center">
+    <div className="w-screen  h-screen bg-stone-300 flex justify-center items-center">
 
       <Routes>
         <Route path="/" element={<Login/>}/>

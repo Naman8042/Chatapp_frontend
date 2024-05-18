@@ -80,7 +80,8 @@ const Phonechat = () => {
 
   return (
     <div className='relative h-screen w-full bg-white overflow-hidden'>
-      <div className='h-[10%] flex justify-center items-center mb-[5%] '>
+      <div className='h-[10%] fixed top-2 w-full'>
+      <div className='h-full flex justify-center items-center mb-[10%] '>
           <img
             alt="n"
             src={image}
@@ -88,7 +89,8 @@ const Phonechat = () => {
           />
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
       </div>
-      <div className='h-[70%] flex flex-col overflow-y-scroll my-4'>
+      </div>
+      <div className='h-[70%] flex flex-col overflow-y-scroll mt-[15%]'>
       {
             conversation
               .slice(0)
