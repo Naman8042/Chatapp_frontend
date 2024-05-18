@@ -108,7 +108,7 @@ const Phonechat = () => {
               })
 
           }
-          <div ref={endRef} />
+          {/* <div ref={endRef} /> */}
         </div>
       </div>
       <div className='flex absolute top-[85%] px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
