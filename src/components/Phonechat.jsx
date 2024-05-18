@@ -80,8 +80,8 @@ const Phonechat = () => {
 
   return (
     <div className='relative sm:hidden w-[95%]  bg-white pb-[5%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
-      <div className=' h-[90%] relative w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
-        <div className='mb-[4%] absolute  w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
+      <div className=' h-[90%]  w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
+        <div className='mb-[4%]  w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
           <img
             alt="n"
@@ -91,7 +91,8 @@ const Phonechat = () => {
           </div>
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
         </div>
-        <div className='flex  flex-col pt-[22%]'>
+        <div>
+        <div className='flex  flex-col '>
           {
             conversation
               .slice(0)
@@ -108,10 +109,11 @@ const Phonechat = () => {
               })
 
           }
-          {/* <div ref={endRef} /> */}
+          <div ref={endRef} />
+        </div>
         </div>
       </div>
-      <div className='flex absolute top-[85%] px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
+      <div className='flex absolute bottom-3 px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
         <input placeholder='Type a Message' className='w-[80%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
 
         <IconButton onClick={sendChat} className='w-[20%] bg-white'>
