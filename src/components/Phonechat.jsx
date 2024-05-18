@@ -79,22 +79,17 @@ const Phonechat = () => {
   }
 
   return (
-    <div className='relative sm:hidden w-[95%]  bg-white pb-[5%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
-      <div className='absolute top-0 mb-[4%]  w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
-          <div className='w-[20%]'>
+    <div className='relative h-screen w-full bg-white overflow-hidden'>
+      <div className='h-[10%] flex justify-center items-center mb-[5%] '>
           <img
             alt="n"
             src={image}
-            className="h-16 mx-auto object-cover rounded-full w-16"
+            className="h-16 mx-auto object-cover rounded-full w-16 p-[1%]"
           />
-          </div>
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
-        </div>
-      <div className=' h-[90%]  w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
-        
-        <div>
-        <div className='flex h-[90%] flex-col '>
-          {
+      </div>
+      <div className='h-[70%] flex flex-col overflow-y-scroll my-4'>
+      {
             conversation
               .slice(0)
               .map((message, index) => {
@@ -111,19 +106,28 @@ const Phonechat = () => {
 
           }
           <div ref={endRef} />
-        </div>
-        </div>
       </div>
-      <div className='flex absolute bottom-3 px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
-        <input placeholder='Type a Message' className='w-[80%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
+      <div className='absolute bottom-3 flex px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
+      <input placeholder='Type a Message' className='w-[80%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
 
-        <IconButton onClick={sendChat} className='w-[20%] bg-white'>
-          <IoMdSend size={30} color='white' />
-        </IconButton>
-      </div>
-  
+      <IconButton onClick={sendChat} className='w-[20%] bg-white'>
+      <IoMdSend size={30} color='white' />
+      </IconButton>
+      </div>  
     </div>
   );
 }
 
 export default Phonechat;
+
+
+{/* <div className='w-[20%]'>
+          
+
+
+          <div className='flex h-[90%] flex-col overflow-y-scroll '>
+          
+        </div>
+        <div className=' absolute bottom-3 '>
+        
+      </div> */}
