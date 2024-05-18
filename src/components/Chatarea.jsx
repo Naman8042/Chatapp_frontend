@@ -34,6 +34,7 @@ function Chatarea() {
   const name  = location.state.name;
   const users = location.state.users
   const length = location.state.length
+  const image = location.state.image
   // console.log(users.length)
   useEffect(()=>{
     socket = io(ENDPOINT)
@@ -99,7 +100,11 @@ function Chatarea() {
     <div className='relative hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
       <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
       <div className='w-[90%] px-[3%] flex items-center'>
-      <img src={Default} className='w-[10%]' alt=""/> 
+      <img
+            alt=""
+            src={image}
+            className="h-16  object-cover rounded-full w-16"
+          />
       <div>
       <p className='w-[90%] text-start p-[1%] text-2xl ml-2 font-bold'>{name}</p>
       <div className='flex gap-1 ml-2 '>

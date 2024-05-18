@@ -36,6 +36,7 @@ const Phonechat = () => {
 
   const id = location.state.id;
   const name = location.state.name;
+  const image = location.state.image
 
   useEffect(() => {
     axios.post("https://chatapp-backend-hj9n.onrender.com/user/allmessage", {
@@ -82,7 +83,11 @@ const Phonechat = () => {
       <div className=' h-[90%] w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
         <div className='mb-[4%] fixed top-0 w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
-            <img src={Default} className='w-full' alt="" />
+          <img
+            alt="n"
+            src={image}
+            className="h-16 mx-auto object-cover rounded-full w-16"
+          />
           </div>
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
         </div>

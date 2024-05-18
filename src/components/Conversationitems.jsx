@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Default from '../assets/default.png'
 function Conversationitems({props}) {
+  // console.log(props.users)
   var name;
   var image;
   var content="Start a New Chat";
@@ -26,10 +27,10 @@ function Conversationitems({props}) {
   return (
     
      <>
-     <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0}})}} >
-      <div className='w-[20%] rounded-full '>
+     <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+      <div className='w-[20%] rounded-full  '>
       <img
-            alt="name"
+            
             src={image}
             className="h-16 mx-auto object-cover rounded-full w-16"
           />
@@ -39,8 +40,14 @@ function Conversationitems({props}) {
       <p className='text-sm'>{content}</p>
       </div>
       </div>
-      <div className='flex sm:hidden border-y-2 w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name,length:0}})}} >
-      <div className='w-[30%]'><img src={image} className='w-[100%]' alt=""/></div>
+      <div className='flex sm:hidden bg-gray-100 rounded-lg  w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+      <div className='p-1 w-[30%]'>
+      <img
+            alt="n"
+            src={image}
+            className="h-16 mx-auto object-cover rounded-full w-16"
+          />
+      </div>
       <div className='w-[70%] px-[3%] flex flex-col justify-center'>
       <p className='text-lg font-semibold'>{name}</p>
       <p className='text-sm'>{content}</p>

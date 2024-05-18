@@ -74,7 +74,13 @@ function Online() {
         {
             users.map((user)=>(
                 <div className='flex p-[1%] gap-5 w-[100%] h-[10%] my-[1%] bg-white rounded-3xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[25%] flex justify-center '><img src={Default} className='w-[50%]' alt=""/></div>  
+                <div className='w-[25%] flex justify-center '>
+                <img
+            alt="name"
+            src={Default}
+            className="h-16 mx-auto object-cover rounded-full w-16"
+          />
+                </div>  
                 <div className='w-[75%] flex items-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
                 </div>
