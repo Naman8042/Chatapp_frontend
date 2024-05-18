@@ -79,7 +79,7 @@ const Phonechat = () => {
   }
 
   return (
-    <div className='relative sm:hidden w-[95%]  bg-white pb-[5%] sm:w-[30%] h-screen  p-[0.25%] flex flex-col items-center '>
+    <div className='relative sm:hidden w-[95%]  bg-white pb-[5%] sm:w-[30%] h-full  p-[0.25%] flex flex-col items-center '>
       <div className='mb-[4%] absolute top-0 w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
           <img
