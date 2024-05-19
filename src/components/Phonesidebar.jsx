@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import Conversationitems from './Conversationitems';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { FaUserCircle } from "react-icons/fa";
 import {IconButton} from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import LightModeIcon from '@mui/icons-material/LightMode'
+import { MdLogout } from "react-icons/md";
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -23,13 +23,13 @@ function Sidebar() {
     },[data])
   return (
     <div className='h-screen  w-full sm:w-[30%] overflow-hidden'>
-      <div className='flex justify-center bg-white px-[1%] py-[3%] m-[3%] rounded-3xl'>
-        <div className='w-[30%]'>
+      <div className='flex justify-center bg-white px-[5%] py-[3%] m-[3%] rounded-3xl '>
+        <div className='w-[40%]'>
         <IconButton>
-        <AccountCircleIcon/>
+        <FaUserCircle size={30}/>
         </IconButton>
         </div>
-        <div className='flex justify-center w-[70%]'>
+        <div className='flex justify-between w-[60%]'>
         <IconButton onClick={()=>{navigate("/app/addusers")}}>
         <PersonAddIcon/>
         </IconButton>
@@ -40,7 +40,7 @@ function Sidebar() {
         <AddCircleIcon/>
         </IconButton>
         <IconButton>
-        <LightModeIcon/>
+        < MdLogout/>
         </IconButton>
         </div>
        </div>

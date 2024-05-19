@@ -23,13 +23,13 @@ function Sidebar() {
     },[data])
   return (
     <div className=' w-full sm:w-[30%]'>
-      <div className='flex justify-center bg-white px-[1%] py-[3%] m-[3%] rounded-3xl'>
-        <div className='w-[30%]'>
+      <div className='flex justify-center bg-white px-[5%] py-[3%] m-[3%] rounded-3xl'>
+        <div className='w-[40%]'>
         <IconButton>
         <AccountCircleIcon/>
         </IconButton>
         </div>
-        <div className='flex justify-center w-[70%]'>
+        <div className='flex justify-center w-[60%]'>
         <IconButton onClick={()=>{navigate("addusers")}}>
         <PersonAddIcon/>
         </IconButton>
@@ -52,7 +52,7 @@ function Sidebar() {
        className='b-none text-bg ml-[1%] p-[1%]'
        />
       </div>
-      <div className=' bg-white flex overflow-y-scroll h-[72%] flex-col px-[1%] py-[3%] m-[3%] rounded-3xl'>
+      <div className=' bg-white flex overflow-y-auto scrollbar-thin  scrollbar-track-gray-300 h-[72%] flex-col  p-[1%] m-[3%] rounded-3xl'>
         {
             data.map((conversation)=>{
               if(conversation.isGroupChat===false){

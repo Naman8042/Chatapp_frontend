@@ -27,7 +27,7 @@ function Conversationitems({props}) {
   return (
     
      <>
-     <div className='hidden sm:flex border-y-2 w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+     <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
       <div className='w-[20%] rounded-full  '>
       <img
             
@@ -40,7 +40,7 @@ function Conversationitems({props}) {
       <p className='text-sm'>{content}</p>
       </div>
       </div>
-      <div className='flex sm:hidden bg-gray-100 rounded-lg  w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+      <div className='flex sm:hidden bg-gray-100 rounded-xl  w-[100%] my-[0.5%]' onClick={()=>{navigate("/chat" , {state:{id:props._id,name:name,length:0,image:image}})}} >
       <div className='p-1 w-[30%]'>
       <img
             alt="n"

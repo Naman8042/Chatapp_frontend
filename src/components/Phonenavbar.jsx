@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import {IconButton} from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { FaUserCircle } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LightModeIcon from '@mui/icons-material/LightMode'
@@ -14,12 +16,12 @@ const Phonenavbar = () => {
   return (
     <div className='fixed top-1 w-full flex  flex-col items-center'>
       <div className='flex justify-center items-center bg-white px-[2%] py-[3%] rounded-3xl w-[95%]'>
-        <div className='w-[30%]'>
+      <div className='w-[40%]'>
         <IconButton>
-        <AccountCircleIcon/>
+        <FaUserCircle size={30}/>
         </IconButton>
         </div>
-        <div className='flex justify-center w-[70%]'>
+        <div className='flex justify-between w-[60%]'>
         <IconButton onClick={()=>{navigate("/app/addusers")}}>
         <PersonAddIcon/>
         </IconButton>
@@ -30,7 +32,7 @@ const Phonenavbar = () => {
         <AddCircleIcon/>
         </IconButton>
         <IconButton>
-        <LightModeIcon/>
+        < MdLogout/>
         </IconButton>
         </div>
        </div>

@@ -5,8 +5,17 @@ import {IconButton} from '@mui/material'
 import axios from 'axios'
 import Default from '../assets/default.png'
 import Phonenavbar from './Phonenavbar'
+import { useNavigate } from 'react-router-dom'
 function Online() {
+  const navigate = useNavigate()
+  const[findUsers,setFindUsers] = useState("")
   const[users,setUsers] = useState([])
+  const[data1,setData1] = useState([])
+
+  useEffect(()=>{
+    axios.post("https://chatapp-backend-hj9n.onrender.com/user/finduser",{token:localStorage.getItem("token"),name:findUsers})
+    .then((res)=>setUsers(res.data))
+  },[findUsers])
   useEffect(()=>{
    try{
     axios.post("https://chatapp-backend-hj9n.onrender.com/user/getall",{token:localStorage.getItem("token")})
@@ -16,23 +25,35 @@ function Online() {
 
    }
   },[])
-  async function CreateChat(userId){
-    try{
-     await axios.post("https://chatapp-backend-hj9n.onrender.com/user/accesschats",{
-        userId:userId,
-        token:localStorage.getItem("token")
-     })
-     .then((res)=>console.log(res))
-    }
-    catch(err){
+  const[data,setData] = useState({})
+  const CreateChat = async (userId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/accesschats", {
+        userId: userId,
+        token: token,
+      });
 
+      setData(response.data);
+
+      const currentUserId = localStorage.getItem('id');
+      const otherUser = response.data.users.find(user => user._id !== currentUserId);
+
+      if (otherUser) {
+        const { name, imageUrl: image } = otherUser;
+        navigate("/app/chat", { state: { id: response.data._id, name: name, length: 0, image: image } });
+      }
+    } catch (err) {
+      console.error(err);
     }
-  }
+  };
+
 
   return (
     <>
-    <div className='hidden sm:block w-[70%]'>
-      <div className='flex h-[10%]'>
+    <div className='hidden sm:block w-[70%] h-full m-[1%]'>
+      <div className='h-[30%] '>
+      <div className='flex '>
       <span className='w-[10%] p-[1%]'><img src={Logo} alt=""/></span>
       <p className='w-[90%] flex items-center text-2xl'>Add Users</p>
       </div>
@@ -41,16 +62,17 @@ function Online() {
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
-       className='b-none text-bg ml-[1%] p-[1%]'
+       className='b-none text-bg ml-[1%] p-[1%] w-full outline-none'
+       value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}
        />
       </div>
-      <div className='text-2xl my-[2%] w-[97%] flex flex-col items-center justify-center rounded-3xl'>
+      </div>
+      <div className='h-[65%] overflow-y-scroll px-[10%] '>
         {
             users.map((user)=>(
-                <div className='flex  gap-5 w-[100%] h-[10%] my-[1%] bg-white rounded-3xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[25%] flex justify-center '><img src={Default} className='w-[50%]' alt=""/></div>  
-                <div className='w-[75%] flex items-center'>{user.name}</div>
-                {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
+                <div className='flex items-center gap-2 my-[2%] text-xl bg-gray-200 rounded-xl' onClick={()=>CreateChat(user._id)}>
+                <div className='w-[20%]'><img src={user.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[70%]'>{user.name}</div>
                 </div>
             ))
         }
@@ -69,7 +91,8 @@ function Online() {
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
-       className='b-none text-bg ml-[1%] p-[1%]'
+       className='b-none text-bg ml-[1%] p-[1%] w-full outline-none'
+       value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}
        />
        </div>
         </div>
@@ -78,7 +101,7 @@ function Online() {
       {
             users.map((user)=>(
                 <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[20%]'><img src={Default} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[20%]'><img src={user.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
                 <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
                 </div>

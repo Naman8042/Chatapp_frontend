@@ -9,10 +9,12 @@ function Creategroup() {
   const[users,setUsers] = useState([])
   const[findUsers,setFindUsers]= useState("")
   const[user,setData] = useState([])
+  
   useEffect(()=>{
   axios.post("https://chatapp-backend-hj9n.onrender.com/user/finduser",{token:localStorage.getItem("token"),name:findUsers})
   .then((res)=>setData(res.data))
-},[findUsers])
+  },[findUsers])
+
   function createGroup(){
     axios.post("https://chatapp-backend-hj9n.onrender.com/user/creategroup",{
       token:localStorage.getItem("token"),
@@ -34,17 +36,20 @@ function Creategroup() {
   
   return (
     <>
-    <div className='hidden sm:flex flex-col w-[70%] h-[100%]'>
-    <div className='w-[100%] h-[50%] flex flex-col gap-3 justify-end items-center'>
+    <div className='hidden sm:flex flex-col w-[70%] h-[100%] m-[1%]'>
+    <div className='w-[100%] h-[20%] flex flex-col gap-3 justify-end items-center'>
       <input placeholder='Enter Group Name' className='p-[1%] rounded-xl w-[60%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[1%] rounded-xl w-[60%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>
       
     </div>
-    <div className='flex flex-col justify-center items-center gap-4 m-[1%]'>
+    <div className='flex flex-col  gap-4 m-[1%] px-[10%] overflow-y-auto h-[68%]'>
       {
         user.length>0?(
           user.map((users)=>(
-            <div className='w-[60%] text-center text-xl bg-stone-100 p-[1%] rounded-xl' onClick={()=>Adduser(users._id)}>{users.name}</div>
+            <div className='flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl w-full ' onClick={()=>CreateChat(user._id)}>
+                <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[70%]'>{users.name}</div>
+            </div>
           ))
         ):(
           <div>
@@ -53,7 +58,9 @@ function Creategroup() {
         )
       } 
     </div>
-    <button onClick={createGroup}>Create Group</button>
+    <div className='h-[12%] flex items-center justify-center'>
+    <button onClick={createGroup} className='bg-black text-white m-[3%] py-[1%] px-[2%] rounded-xl'>Create Group</button>
+    </div>
     </div>
     <div className='block sm:hidden w-screen h-screen'>
       <div className='h-[10%] '><Phonenavbar/></div>
@@ -62,11 +69,14 @@ function Creategroup() {
       <input placeholder='Enter Group Name' className='p-[2%] rounded-2xl w-[80%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[2%] rounded-2xl w-[60%] w-[80%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>
       </div>
-      <div className=' py-[5%] h-[70%] flex flex-col justify-center items-center gap-6  my-[5%] overflow-y-scroll'>
+      <div className='flex flex-col gap-7 overflow-y-scroll '>
       {
         user.length>0?(
           user.map((users)=>(
-            <div className='bg-white w-full py-[2%] text-center rounded-xl font-semibold text-xl' onClick={()=>Adduser(users._id)}>{users.name}</div>
+            <div className='flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
+                <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[70%]'>{users.name}</div>
+                </div>
           ))
         ):(
           <div>
