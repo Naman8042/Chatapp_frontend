@@ -4,6 +4,7 @@ import { IoMdSend } from "react-icons/io";
 import Messageself from './Messageself';
 import Messageother from './Messageother';
 import { useLocation } from 'react-router-dom';
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import Default from '../assets/default.png';
@@ -14,6 +15,7 @@ const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 const Phonechat = () => {
   const endRef = useRef(null);
+
   const [conversation, setConversation] = useState([]); 
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const Phonechat = () => {
 
   const senderId = localStorage.getItem("id");
   const [open, setOpen] = useState(false);
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const [connected, setConnected] = useState(false);
   const location = useLocation();
 
@@ -109,12 +111,19 @@ const Phonechat = () => {
           }
           <div ref={endRef} />
       </div>
-      <div className='absolute bottom-3 flex px-[1%] py-[3%] m-[3%] rounded-3xl w-[93%]  bg-black'>
-      <input placeholder='Type a Message' className='w-[80%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
+      <div className='absolute bottom-3 flex  p-[1%] m-[3%] rounded-3xl w-[93%]  bg-black'>
+      <div className='w-[10%] flex items-center justify-center'>
+          <MdOutlineEmojiEmotions onClick={()=>setOpen((prev)=>(!prev))} size={30} color='white' />
+          
+      </div>
+      <input placeholder='Type a Message' className='w-[70%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
 
       <IconButton onClick={sendChat} className='w-[20%] bg-white'>
       <IoMdSend size={30} color='white' />
       </IconButton>
+      </div>
+      <div className='absolute bottom-20 left-5'>
+      <EmojiPicker open={open} onEmojiClick={handleEmoji} width={300}/>
       </div>  
     </div>
   );
@@ -123,13 +132,3 @@ const Phonechat = () => {
 export default Phonechat;
 
 
-{/* <div className='w-[20%]'>
-          
-
-
-          <div className='flex h-[90%] flex-col overflow-y-scroll '>
-          
-        </div>
-        <div className=' absolute bottom-3 '>
-        
-      </div> */}
