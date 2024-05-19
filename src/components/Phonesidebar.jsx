@@ -24,7 +24,7 @@ function Sidebar() {
   return (
     <div className='h-screen  w-full sm:w-[30%] overflow-hidden'>
       <div className='flex justify-center bg-white px-[5%] py-[3%] m-[3%] rounded-3xl '>
-        <div className='w-[40%]'>
+        <div className='w-[40%] '>
         <IconButton>
         <FaUserCircle size={30}/>
         </IconButton>
@@ -44,7 +44,7 @@ function Sidebar() {
         </IconButton>
         </div>
        </div>
-      <div className=' bg-white flex items-center px-[1%] py-[3%] m-[3%] rounded-3xl'>
+      <div className=' bg-white flex items-center p-[1%]  m-[3%] rounded-3xl'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
@@ -52,7 +52,7 @@ function Sidebar() {
        className='b-none text-bg ml-[1%] p-[1%]'
        />
       </div>
-      <div className=' bg-white flex h-[73%] overflow-y-scroll flex-col px-[1%] py-[3%] m-[3%] rounded-3xl'>
+      <div className=' bg-white flex h-[73%] overflow-y-auto flex-col p-[1%]  m-[3%] rounded-3xl'>
         {
             data.map((conversation)=>{
               if(conversation.isGroupChat===false){
