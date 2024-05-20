@@ -169,6 +169,7 @@ function Chatarea() {
         <input 
           type="file" 
           className="hidden" 
+          onChange={(e)=>setFile(e.target.files[0])}
         />
       </label>
           

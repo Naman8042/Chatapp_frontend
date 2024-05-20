@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { IoMdSend } from "react-icons/io";
 import Messageself from './Messageself';
 import Messageother from './Messageother';
+import { FaRegImage } from "react-icons/fa";
 import { useLocation } from 'react-router-dom';
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from 'axios';
@@ -15,7 +16,7 @@ const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 const Phonechat = () => {
   const endRef = useRef(null);
-
+  const[file,setFile] = useState(null)
   const [conversation, setConversation] = useState([]); 
 
   useEffect(() => {
@@ -68,9 +69,14 @@ const Phonechat = () => {
     try {
      
       const { data } = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage", {
-        token: localStorage.getItem("token"),
-        chatId: id,
-        content: content
+        token:localStorage.getItem("token"),
+      chatId:id,
+      content:content,
+      file:file
+     },{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
       });
       setContent("");
       socket.emit("new message", data, localStorage.getItem("id"));
@@ -112,13 +118,20 @@ const Phonechat = () => {
           <div ref={endRef} />
       </div>
       <div className='absolute bottom-3 flex  p-[1%] m-[3%] rounded-3xl w-[93%]  bg-black'>
-      <div className='w-[10%] flex items-center justify-center'>
-          <MdOutlineEmojiEmotions onClick={()=>setOpen((prev)=>(!prev))} size={30} color='white' />
-          
+      <div className='w-[20%] flex items-center justify-center gap-1'>
+          <MdOutlineEmojiEmotions onClick={()=>setOpen((prev)=>(!prev))} size={20} color='white' />
+          <label className="cursor-pointer flex items-center justify-center  rounded-md ">
+        <FaRegImage  color='white' size={20}/>
+        <input 
+          type="file" 
+          className="hidden" 
+          onChange={(e)=>setFile(e.target.files[0])}
+        />
+      </label>
       </div>
-      <input placeholder='Type a Message' className='w-[70%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
+      <input placeholder='Type a Message' className='w-[65%] outline-none bg-black text-gray-400 p-[2%] mx-[4%] rounded-xl' value={content} onChange={(e) => setContent(e.target.value)} />
 
-      <IconButton onClick={sendChat} className='w-[20%] bg-white'>
+      <IconButton onClick={sendChat} className='w-[15%] bg-white'>
       <IoMdSend size={30} color='white' />
       </IconButton>
       </div>
