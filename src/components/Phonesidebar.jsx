@@ -23,8 +23,8 @@ function Sidebar() {
     get()
     },[data])
   return (
-    <div className='h-screen overflow-x-hidden overflow-y-hidden py-[2%]'>
-      <div className='h-[15%] overflow-x-hidden'>
+    <div className='h-screen overflow-x-hidden overflow-y-hidden py-[2%] px-[2%]'>
+      <div className='h-[15%] overflow-x-hidden flex justify-center'>
       <Phonenavbar/> 
       </div>
       <div className=' bg-white flex items-center p-[1%]  m-[3%] rounded-3xl h-[10%] overflow-x-hidden'>
@@ -35,7 +35,7 @@ function Sidebar() {
        className='b-none text-bg ml-[1%] p-[1%]'
        />
       </div>
-      <div className=' bg-white flex h-[72%] overflow-y-auto overflow-x-hidden flex-col p-[1%]  m-[3%] rounded-3xl'>
+      <div className=' bg-white flex h-[72%] overflow-y-auto overflow-x-hidden flex-col  p-[1%]   rounded-3xl'>
         {
             data.map((conversation)=>{
               if(conversation.isGroupChat===false){
