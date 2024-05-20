@@ -37,6 +37,7 @@ function Chatarea() {
   const users = location.state.users
   const length = location.state.length
   const image = location.state.image
+  
   // console.log(users.length)
   useEffect(()=>{
     socket = io(ENDPOINT)

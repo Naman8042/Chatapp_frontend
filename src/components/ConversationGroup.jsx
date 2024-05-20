@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import Default from '../assets/default.png'
 function Conversationitems({props}) {
   var name;
+  var image;
   var content="Start a New Chat";
   const navigate = useNavigate()
   const users = props.users
   const length = users.length
+  console.log(props)
   if(props.latestMessage!==undefined){
     if(props.latestMessage.content.length<30){
       content = props.latestMessage.content
@@ -16,17 +18,16 @@ function Conversationitems({props}) {
     }
     
   }
-  if(localStorage.getItem("id")===props.users[0]._id){
-    name = props.users[1].name
-  }
-  else{
-    name = props.users[0].name
-  }
+  
+    name = props.chatName
+    image = props.imageUrl
+  
+ 
   return (
     
      
       <>
-      <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+      <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:props.users.length,image:image,users:props.users}})}} >
       <div className='w-[20%] rounded-full  '>
       <img
             

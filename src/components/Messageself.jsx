@@ -3,7 +3,7 @@ import React from 'react'
 function Messageself({props}) {
 
   var image = null;
-  console.log(props)
+
   
   if(props.image!==null){
     image = props.image
