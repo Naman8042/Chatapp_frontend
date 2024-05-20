@@ -10,8 +10,11 @@ function Login() {
   async function Login(){
     try{
       axios.post("https://chatapp-backend-hj9n.onrender.com/user/login",{name,password})
-      .then((res)=>{localStorage.setItem("token",res.data.token)
+      .then((res)=>{
+      console.log(res)  
+      localStorage.setItem("token",res.data.token)
       ,localStorage.setItem("id",res.data._id)
+      ,localStorage.setItem("image",res.data.imageUrl)
       navigate("/app/welcome")
     })
     }

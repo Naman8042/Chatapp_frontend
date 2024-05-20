@@ -14,12 +14,11 @@ const Phonenavbar = () => {
   const navigate = useNavigate()
   const[data,setData] = useState([]);
   return (
-    <div className='fixed top-1 w-full flex  flex-col items-center'>
-      <div className='flex justify-center items-center bg-white px-[2%] py-[3%] rounded-3xl w-[95%]'>
-      <div className='w-[40%]'>
-        <IconButton>
-        <FaUserCircle size={30}/>
-        </IconButton>
+    <div className='fixed top-1 w-screen flex  flex-col items-center'>
+       <div className='flex justify-center bg-white px-[5%] py-[3%]  rounded-3xl w-[93%]'>
+        <div className='w-[40%] '>
+        <img src={localStorage.getItem('image')} alt='' className='h-10  object-cover rounded-full w-10'/>
+
         </div>
         <div className='flex justify-between w-[60%]'>
         <IconButton onClick={()=>{navigate("/app/addusers")}}>

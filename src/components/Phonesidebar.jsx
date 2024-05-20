@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Conversationgroup from './ConversationGroup'
+import Phonenavbar from './Phonenavbar';
 
 function Sidebar() {
     const navigate = useNavigate()
@@ -22,29 +23,11 @@ function Sidebar() {
     get()
     },[data])
   return (
-    <div className='h-screen  w-full sm:w-[30%] overflow-hidden'>
-      <div className='flex justify-center bg-white px-[5%] py-[3%] m-[3%] rounded-3xl '>
-        <div className='w-[40%] '>
-        <IconButton>
-        <FaUserCircle size={30}/>
-        </IconButton>
-        </div>
-        <div className='flex justify-between w-[60%]'>
-        <IconButton onClick={()=>{navigate("/app/addusers")}}>
-        <PersonAddIcon/>
-        </IconButton>
-        <IconButton onClick={()=>{navigate("/app/create-groups")}}>
-        <GroupAddIcon/>
-        </IconButton>
-        <IconButton onClick={()=>{navigate("/app/users")}}>
-        <AddCircleIcon/>
-        </IconButton>
-        <IconButton>
-        < MdLogout/>
-        </IconButton>
-        </div>
-       </div>
-      <div className=' bg-white flex items-center p-[1%]  m-[3%] rounded-3xl'>
+    <div className='h-screen overflow-x-hidden overflow-y-hidden'>
+      <div className='h-[15%] overflow-x-hidden'>
+      <Phonenavbar/> 
+      </div>
+      <div className=' bg-white flex items-center p-[1%]  m-[3%] rounded-3xl h-[10%] overflow-x-hidden'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
@@ -52,7 +35,7 @@ function Sidebar() {
        className='b-none text-bg ml-[1%] p-[1%]'
        />
       </div>
-      <div className=' bg-white flex h-[73%] overflow-y-auto flex-col p-[1%]  m-[3%] rounded-3xl'>
+      <div className=' bg-white flex h-[75%] overflow-y-auto overflow-x-hidden flex-col p-[1%]  m-[3%] rounded-3xl'>
         {
             data.map((conversation)=>{
               if(conversation.isGroupChat===false){

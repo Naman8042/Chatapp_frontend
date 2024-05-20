@@ -17,7 +17,7 @@ function Maincontainer() {
     <Sidebar/>
     <Outlet/>
     </div>
-    <div className='block sm:hidden'>
+    <div className='block sm:hidden w-screen'>
       <Outlet/>
     </div>
     

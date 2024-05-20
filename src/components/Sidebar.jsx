@@ -23,15 +23,13 @@ function Sidebar() {
     },[data])
   return (
     <div className=' w-full sm:w-[30%]'>
-      <div className='flex justify-center bg-white px-[5%] py-[3%] m-[3%] rounded-3xl'>
-        <div className='w-[40%]'>
-        <IconButton>
-        <AccountCircleIcon/>
-        </IconButton>
+      <div className='flex justify-center  px-[5%] py-[3%] m-[3%] rounded-3xl'>
+        <div className='w-[40%] '>
+        <img src={localStorage.getItem('image')} alt='' className='h-10  object-cover rounded-full w-10'/>
         </div>
-        <div className='flex justify-center w-[60%]'>
+        <div className='flex justify-between w-[60%] '>
         <IconButton onClick={()=>{navigate("addusers")}}>
-        <PersonAddIcon/>
+        <PersonAddIcon />
         </IconButton>
         <IconButton onClick={()=>{navigate("create-groups")}}>
         <GroupAddIcon/>
