@@ -17,6 +17,7 @@ const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 function Chatarea() {
   const senderId = localStorage.getItem("id")
+  const[file,setFile] = useState(null)
   const[open,setOpen] = useState(false)
   const[conversation,setConversation] = useState([])
   const[content,setContent] = useState("")
@@ -57,7 +58,6 @@ function Chatarea() {
   },[conversation])
   useEffect(()=>{
     socket.on("message recieved",(newMessagerecieved)=>{
-      console.log(newMessagerecieved)
       setConversation([...conversation],newMessagerecieved)
       setConnected(false)
     })
@@ -67,8 +67,11 @@ function Chatarea() {
      const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
       token:localStorage.getItem("token"),
       chatId:id,
-      content:content
+      content:content,
+      image:file
      })
+     .then((res)=>console.log(res))
+     console.log(data)
      setContent("")
      socket.emit("new message",data,localStorage.getItem("id"))
      
@@ -81,11 +84,13 @@ function Chatarea() {
   async function sendChatbyenter(event){
     try{
       if (event.key === 'Enter') {
-        const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
+      const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
       token:localStorage.getItem("token"),
       chatId:id,
-      content:content
-     })
+      content:content,
+      image:file
+      })
+     .then((res)=>console.log(res))
      setContent("")
      socket.emit("new message",data,localStorage.getItem("id"))
       }
@@ -139,9 +144,21 @@ function Chatarea() {
           const sender = message.sender ;
           
           if(sender && sender._id===senderId){
+            if(message.content==="undefined"){
+             return (
+              <div className='w-full flex justify-end'>
+                <img src={message.image} alt=''/>
+              </div>)
+            }
             return <Messageself props={message} key={index}/>
           }
           else{
+            if(message.content==="undefined"){
+              return (
+               <div className='w-full flex justify-start'>
+                 <img src={message.image} alt=''/>
+               </div>)
+             }
             return <Messageother props={message} key={index}/> 
           }
           
@@ -160,8 +177,10 @@ function Chatarea() {
         <IconButton onClick={sendChat} onKeyDown={sendChatbyenter} >
             <IoSend  size={50} color='white' className='bg-green-500 w-full p-3 rounded-full '/>
         </IconButton>
-        </div>     
+        </div>    
+
       </div>
+      <input type='file' onChange={(e)=>setFile(e.target.files[0])}/>
       
     </div>
     <div className='absolute bottom-[14%] left-[32.5%]'>

@@ -7,6 +7,9 @@ function Conversationitems({props}) {
   var image;
   var content="Start a New Chat";
   const navigate = useNavigate()
+
+  
+
   if(props.latestMessage!==undefined){
     if(props.latestMessage.content.length<30){
       content = props.latestMessage.content
