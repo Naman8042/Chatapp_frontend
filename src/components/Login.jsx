@@ -2,21 +2,26 @@ import React,{useState} from 'react'
 import Logo from '../assets/Logo.png'
 import axios from 'axios'
 import {useNavigate,Link} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { useSelector, useDispatch } from 'react-redux'
+import { setId,setImage } from '../Slices/Data'
 
 function Login() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const[name,setName] = useState("");
   const[password,setPassword] = useState("")
+
+
   async function Login(){
     try{
       axios.post("https://chatapp-backend-hj9n.onrender.com/user/login",{name,password})
       .then((res)=>{
-      console.log(res)  
-      localStorage.setItem("token",res.data.token)
+      Cookies.set('token',res.data.token)
       ,localStorage.setItem("id",res.data._id)
       ,localStorage.setItem("image",res.data.imageUrl)
       navigate("/app/welcome")
-    })
+      })
     }
     catch(err){
       console.log(err);
@@ -42,6 +47,7 @@ function Login() {
         <Link to="/signup" className='font-bold'>Sign Up</Link> 
         </div>  
       </div>
+      
     </div>
   )
 }

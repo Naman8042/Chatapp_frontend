@@ -13,11 +13,13 @@ import Default from '../assets/default.png'
 import EmojiPicker from 'emoji-picker-react'
 import Emoji from '../assets/emoji.png'
 import { IoSend } from "react-icons/io5";
+import Cookies from 'js-cookie'
+import { useSelector } from 'react-redux';
 
 const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
 function Chatarea() {
-  const senderId = localStorage.getItem("id")
+  const senderId =  localStorage.getItem('id')
   const[file,setFile] = useState(null)
   const[open,setOpen] = useState(false)
   const[conversation,setConversation] = useState([])
@@ -51,7 +53,7 @@ function Chatarea() {
   }
   useEffect(()=>{
     
-      axios.post("https://chatapp-backend-hj9n.onrender.com/user/allmessage",{token:localStorage.getItem("token"),
+      axios.post("https://chatapp-backend-hj9n.onrender.com/user/allmessage",{token:Cookies.get("token"),
       chat:id})
       .then((res)=>{setConversation(res.data)
       socket.emit("join chat",id)
@@ -67,7 +69,7 @@ function Chatarea() {
   async function sendChat(){
     try{
      const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
-      token:localStorage.getItem("token"),
+      token:Cookies.get("token"),
       chatId:id,
       content:content,
       file:file
@@ -78,7 +80,7 @@ function Chatarea() {
      })
      setFile(null)
      setContent("")
-     socket.emit("new message",data,localStorage.getItem("id"))
+     socket.emit("new message",data,senderId)
      
     }
     catch(err){
@@ -90,13 +92,13 @@ function Chatarea() {
     try{
       if (event.key === 'Enter') {
       const {data} = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage",{
-      token:localStorage.getItem("token"),
+      token:Cookies.get("token"),
       chatId:id,
       content:content,
       file:file
       })
      setContent("")
-     socket.emit("new message",data,localStorage.getItem("id"))
+     socket.emit("new message",data,senderId)
       }
     }
     catch(err){

@@ -8,7 +8,6 @@ function Conversationitems({props}) {
   const navigate = useNavigate()
   const users = props.users
   const length = users.length
-  console.log(props)
   if(props.latestMessage!==undefined){
     if(props.latestMessage.content.length<30){
       content = props.latestMessage.content

@@ -1,8 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Default from '../assets/default.png'
+import { useSelector } from 'react-redux'
 function Conversationitems({props}) {
-  // console.log(props.users)
+  const id = localStorage.getItem('id')
   var name;
   var image;
   var content="Start a New Chat";
@@ -19,7 +20,7 @@ function Conversationitems({props}) {
     }
     
   }
-  if(localStorage.getItem("id")===props.users[0]._id){
+  if(id===props.users[0]._id){
     name = props.users[1].name
     image = props.users[1].imageUrl
   }
@@ -35,7 +36,7 @@ function Conversationitems({props}) {
       <img
             
             src={image}
-            className="h-16 mx-auto object-cover rounded-full w-16"
+            className="md:h-16 mx-auto object-cover rounded-full sm:w-12 sm:h-12 md:w-16"
           />
       </div>
       <div className='w-[80%] px-[3%] flex flex-col justify-center'>

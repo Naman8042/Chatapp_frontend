@@ -11,6 +11,7 @@ import { io } from 'socket.io-client';
 import Default from '../assets/default.png';
 import EmojiPicker from 'emoji-picker-react';
 import Emoji from '../assets/emoji.png';
+import Cookies from 'js-cookie'
 
 const ENDPOINT = "https://chatapp-backend-hj9n.onrender.com";
 var socket;
@@ -43,7 +44,7 @@ const Phonechat = () => {
 
   useEffect(() => {
     axios.post("https://chatapp-backend-hj9n.onrender.com/user/allmessage", {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       chat: id
     })
       .then((res) => {
@@ -69,7 +70,7 @@ const Phonechat = () => {
     try {
      
       const { data } = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/sendmessage", {
-        token:localStorage.getItem("token"),
+        token:Cookies.get("token"),
       chatId:id,
       content:content,
       file:file

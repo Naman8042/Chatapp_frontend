@@ -3,6 +3,7 @@ import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded'
 import {IconButton} from '@mui/material'
 import axios from 'axios'
 import Phonenavbar from './Phonenavbar'
+import Cookies from 'js-cookie'
 
 function Creategroup() {
   const[groupName,setGroupName] = useState("")
@@ -11,13 +12,13 @@ function Creategroup() {
   const[user,setData] = useState([])
   
   useEffect(()=>{
-  axios.post("https://chatapp-backend-hj9n.onrender.com/user/finduser",{token:localStorage.getItem("token"),name:findUsers})
+  axios.post("https://chatapp-backend-hj9n.onrender.com/user/finduser",{token:Cookies.get("token"),name:findUsers})
   .then((res)=>setData(res.data))
   },[findUsers])
 
   function createGroup(){
     axios.post("https://chatapp-backend-hj9n.onrender.com/user/creategroup",{
-      token:localStorage.getItem("token"),
+      token:Cookies.get("token"),
       users:users,
       name:groupName
     })
@@ -26,7 +27,9 @@ function Creategroup() {
   }
   function Adduser(id){
    if(users.includes(id)){
+    console.log(id)
     alert("user already addes")
+    console.log(users)
    }
    else{
     setUsers([...users,id])
@@ -45,12 +48,15 @@ function Creategroup() {
     <div className='flex flex-col  gap-4 m-[1%] px-[10%] overflow-y-auto h-[68%]'>
       {
         user.length>0?(
-          user.map((users)=>(
-            <div className='flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl w-full ' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
-                <div className='w-[70%]'>{users.name}</div>
-            </div>
-          ))
+          user.map((users)=>{
+            if(users._id!==localStorage.getItem('id')){
+              return <div className='cursor-pointer flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl w-full ' onClick={()=>Adduser(users._id)}>
+              <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+              <div className='w-[70%]'>{users.name}</div>
+          </div>
+            }
+            
+          })
         ):(
           <div>
             No user found
@@ -73,7 +79,7 @@ function Creategroup() {
       {
         user.length>0?(
           user.map((users)=>(
-            <div className='flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
+            <div className='flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl' onClick={()=>Adduser(user._id)}>
                 <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
                 <div className='w-[70%]'>{users.name}</div>
                 </div>

@@ -11,13 +11,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Conversationgroup from './ConversationGroup'
 import Phonenavbar from './Phonenavbar';
+import Cookies from 'js-cookie'
 
 function Sidebar() {
     const navigate = useNavigate()
     const[data,setData] = useState([]);
     useEffect(()=>{
     async function get(){
-    await axios.post("https://chatapp-backend-hj9n.onrender.com/user/fetchchats",{token :localStorage.getItem("token")})
+    await axios.post("https://chatapp-backend-hj9n.onrender.com/user/fetchchats",{token :Cookies.get("token")})
     .then((res)=>setData(res.data))
     }
     get()
