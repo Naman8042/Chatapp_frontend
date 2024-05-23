@@ -69,8 +69,8 @@ function Creategroup() {
     </div>
     </div>
     <div className='block sm:hidden w-screen h-screen'>
-      <div className='h-[12%] '><Phonenavbar/></div>
-      <div className=' flex flex-col w-[100%] h-[78%] p-[2%]'>
+      <div className='h-[15%] flex justify-center items-center py-[2%] px-[2%] '><Phonenavbar/></div>
+      <div className=' flex flex-col w-[100%] h-[75%] p-[2%]'>
       <div className='w-[100%] h-[30%] flex flex-col gap-3 justify-center items-center '>
       <input placeholder='Enter Group Name' className='p-[2%] rounded-2xl w-[80%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[2%] rounded-2xl w-[60%] w-[80%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>

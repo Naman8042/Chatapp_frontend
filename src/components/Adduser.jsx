@@ -86,9 +86,9 @@ function Online() {
       </div>
     </div>
     <div className='w-screen block sm:hidden h-screen'>
-      <div className='h-[40%]'>
-        <div className='h-[30%]'><Phonenavbar/></div>
-        <div className='h-[80%]'>
+      <div className='h-[30%]'>
+        {/* <div className='h-[20%] flex justify-center items-center py-[2%] px-[2%] '><Phonenavbar/></div> */}
+        <div className='h-full'>
         <div className='flex '>
        <span className='w-[50%] p-[1%]'><img src={Logo} alt="" className='w-24 h-24'/></span>
        <p className='w-[50%] flex items-center text-2xl text-start'>Add Users</p>
@@ -104,11 +104,11 @@ function Online() {
        </div>
         </div>
       </div>
-      <div className='h-[60%] flex flex-col gap-4 items-center py-[2%] overflow-y-scroll'>
+      <div className='h-[70%] flex flex-col gap-4 items-center py-[2%] overflow-y-scroll'>
       {
             users.map((user)=>(
                 <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[20%]'><img src={user.imageUrl} className='md:h-16 sm:h-12 sm:w-12  mx-auto object-cover rounded-full md:w-16' alt=""/></div>  
+                <div className='w-[20%]'><img src={user.imageUrl} className='md:h-16  w-12 h-12 object-cover rounded-full md:w-16' alt=""/></div>  
                 <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
                 </div>

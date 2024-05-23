@@ -14,7 +14,7 @@ const Phonenavbar = () => {
   const navigate = useNavigate()
   const[data,setData] = useState([]);
   return (
-    <div className='fixed top-1 w-screen flex  flex-col items-center'>
+    <div className=' w-screen flex  flex-col items-center'>
        <div className='flex justify-center bg-white px-[5%] py-[3%]  rounded-3xl w-[93%]'>
         <div className='w-[40%] '>
         <img src={localStorage.getItem('image')} alt='' className='h-10  object-cover rounded-full w-10'/>

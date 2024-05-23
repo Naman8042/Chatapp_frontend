@@ -25,18 +25,18 @@ function Sidebar() {
     },[data])
   return (
     <div className='h-screen overflow-x-hidden overflow-y-hidden py-[2%] px-[2%]'>
-      <div className='h-[15%] overflow-x-hidden flex justify-center'>
+      <div className='h-[15%] overflow-x-hidden flex justify-center items-center'>
       <Phonenavbar/> 
       </div>
-      <div className=' bg-white flex items-center p-[1%]  m-[3%] rounded-3xl h-[10%] overflow-x-hidden'>
+      <div className='bg-white flex items-center m-[3%] rounded-3xl h-[8%] overflow-x-hidden'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
-       className='b-none text-bg ml-[1%] p-[1%]'
+       className='b-none text-bg ml-[1%] p-[1%] w-full py-[2%]'
        />
       </div>
-      <div className=' bg-white flex h-[72%] overflow-y-auto overflow-x-hidden flex-col  p-[1%]   rounded-3xl'>
+      <div className=' bg-white flex h-[74%] overflow-y-auto overflow-x-hidden flex-col  p-[1%]   rounded-3xl'>
         {
             data.map((conversation)=>{
               if(conversation.isGroupChat===false){
