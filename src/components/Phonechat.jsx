@@ -80,6 +80,7 @@ const Phonechat = () => {
       }
       });
       setContent("");
+      setFile(null)
       socket.emit("new message", data, localStorage.getItem("id"));
     }
     catch (err) {

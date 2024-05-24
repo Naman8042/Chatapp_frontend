@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 
 function Creategroup() {
   const[groupName,setGroupName] = useState("")
+  const[file,setFile] = useState(null)
   const[users,setUsers] = useState([])
   const[findUsers,setFindUsers]= useState("")
   const[user,setData] = useState([])
@@ -17,13 +18,20 @@ function Creategroup() {
   },[findUsers])
 
   function createGroup(){
-    axios.post("https://chatapp-backend-hj9n.onrender.com/user/creategroup",{
+    
+    try{
+      axios.post("https://chatapp-backend-hj9n.onrender.com/user/creategroup",{
       token:Cookies.get("token"),
       users:users,
-      name:groupName
+      name:groupName,
+      file:file
     })
     .then((res)=>console.log(res.data))
     setUsers([])
+    }
+    catch(err){
+      console.log(err)
+    }
   }
   function Adduser(id){
    if(users.includes(id)){
@@ -43,7 +51,8 @@ function Creategroup() {
     <div className='w-[100%] h-[20%] flex flex-col gap-3 justify-end items-center'>
       <input placeholder='Enter Group Name' className='p-[1%] rounded-xl w-[60%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[1%] rounded-xl w-[60%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>
-      
+      {/* <input type='file' className='border-2' onChange={(e)=>setFile(e.target.files[0])} /> */}
+  
     </div>
     <div className='flex flex-col  gap-4 m-[1%] px-[10%] overflow-y-auto h-[68%]'>
       {
