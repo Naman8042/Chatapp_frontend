@@ -2,28 +2,50 @@ import React,{useState} from 'react'
 import Logo from '../assets/Logo.png'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { FaRegUserCircle } from "react-icons/fa";
-import User from '../assets/user.png'
+
 function Login() {
   const navigate = useNavigate()
   const[file,setFile] = useState(null)
   const[name,setName] = useState("");
   const[email,setEmail] = useState("")
+  const[imageUrl,setImageUrl] = useState(null)
   const[password,setPassword] = useState("")
   async function Login(){
     try{
+      if(!name || !password || !email){
+        return toast.error("Please Complete All The fields")
+      }
       axios.post("https://chatapp-backend-hj9n.onrender.com/user/signup",{name,password,email,file},{
         headers: {
           'Content-Type': 'multipart/form-data'
         }})
+      .then(res=>{
+      console.log(res)
+      if(res.data.success){
       setFile(null)
+      toast.success("Signup Successfully")
       navigate("/")
+      }
+      else{
+       toast.error('User Already Exists')
+      }
+      })
     }
     
     catch(err){
       console.log(err);
     }
   } 
+  function setImage (event){
+    const file = event.target.files[0];
+    if (file) {
+      setFile(file)
+      const imageUrl = URL.createObjectURL(file);
+      setImageUrl(imageUrl);
+    }
+  }
   return (
     <div className='w-[90%] h-[90%] bg-white flex flex-col sm:flex-row'>
       <div className='hidden w-[30%] sm:block bg-gray-200 h-[100%]  justify-center items-center'>
@@ -33,14 +55,22 @@ function Login() {
         <img src={Logo} alt="" className='sm:hidden w-48 mb-[10%]'/>
         <p className='w-full text-center font-bold text-xl md:text-2xl'>Signup to your Account</p>
         <br/>
-        <label>
-        {/* <img src={User} alt='' className=''/>   */}
+        <div className='w-full flex flex-col justify-center items-center'>
         
-        <FaRegUserCircle size={100} color='gray'/> 
-      
-        <input type='file' className='border-2 hidden' onChange={(e)=>setFile(e.target.files[0])} />
-        <p className='text-lg font-semibold mt-[5%]'>Choose A Photo</p>
-        </label>
+        {
+          imageUrl?(
+  
+            <img src={imageUrl} alt='' className='w-32 h-32 rounded-full'/>
+          
+          ):(
+            <label>
+              <FaRegUserCircle className='size-32' color='gray'/> 
+              <input type='file' className='border-2 hidden' onChange={setImage} />
+            </label>
+          )
+        }
+        <p className='text-lg font-semibold mt-[1%] w-full text-center'>Choose A Photo</p>
+        </div>
         <br/>
         <input type="text" placeholder='Enter Your Username' value={name} onChange={(e)=>setName(e.target.value)} className='px-[2%] py-[1%] border-2 rounded-md'/>
         <br/>

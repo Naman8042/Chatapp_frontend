@@ -21,6 +21,9 @@ function Login() {
 
 
   async function Login(){
+    if(!name || !password){
+      return toast.error("Please Fill All The Details Completely")
+    }
     setLoader(true)
     try{
       axios.post("https://chatapp-backend-hj9n.onrender.com/user/login",{name,password})
