@@ -19,10 +19,20 @@ const Phonechat = () => {
   const endRef = useRef(null);
   const[file,setFile] = useState(null)
   const [conversation, setConversation] = useState([]); 
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   },[conversation]); 
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFile(file)
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -80,6 +90,7 @@ const Phonechat = () => {
       }
       });
       setContent("");
+      setSelectedImage(null)
       setFile(null)
       socket.emit("new message", data, localStorage.getItem("id"));
     }
@@ -89,7 +100,7 @@ const Phonechat = () => {
   }
 
   return (
-    <div className='relative h-screen w-full  overflow-hidden'>
+    <div className='relative h-screen w-full  overflow-hidden bg-white'>
       <div className='h-[10%] fixed top-0 w-full bg-gray-100 '>
       <div className='h-full flex justify-center items-center '>
           <img
@@ -127,7 +138,7 @@ const Phonechat = () => {
         <input 
           type="file" 
           className="hidden" 
-          onChange={(e)=>setFile(e.target.files[0])}
+          onChange={handleFileChange}
         />
       </label>
       </div>
@@ -137,6 +148,11 @@ const Phonechat = () => {
       <IoMdSend size={30} color='white' />
       </IconButton>
       </div>
+      <div className='absolute bottom-[13%] border-8 w-full bg-white  flex items-center justify-center'>
+    {
+      selectedImage && <img src={selectedImage} alt='' className='h-64 w-64'/>
+    }
+    </div>
       <div className='absolute bottom-20 left-5'>
       <EmojiPicker open={open} onEmojiClick={handleEmoji} width={300}/>
       </div>  

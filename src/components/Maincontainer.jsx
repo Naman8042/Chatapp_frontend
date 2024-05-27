@@ -13,7 +13,7 @@ function Maincontainer() {
 )
   return (
     <>
-    <div className='hidden sm:flex sm:w-[95%] md:w-[90%] bg-stone-50 sm:h-[95%] md:h-[90%] rounded-xl '>
+    <div className='hidden sm:flex sm:w-[95%] lg:w-[90%] bg-stone-50 sm:h-[95%] lg:h-[90%] rounded-xl '>
     <Sidebar/>
     <Outlet/>
     </div>

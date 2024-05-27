@@ -21,12 +21,22 @@ var socket;
 function Chatarea() {
   const senderId =  localStorage.getItem('id')
   const[file,setFile] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null);
   const[open,setOpen] = useState(false)
   const[conversation,setConversation] = useState([])
   const[content,setContent] = useState("")
   const[connected,setConnected] = useState(false)
   const location = useLocation();
   const endRef = useRef(null)
+  
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFile(file)
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
 
   useEffect(()=>{
     endRef.current?.scrollIntoView({behaviour:"smooth"}) 
@@ -79,6 +89,7 @@ function Chatarea() {
       }
      })
      setFile(null)
+     setSelectedImage(null)
      setContent("")
      socket.emit("new message",data,senderId)
      
@@ -108,22 +119,22 @@ function Chatarea() {
   
   return (
     <>
-    <div className='relative hidden sm:block gap-5 flex-col w-[70%] justify-center items-center m-[1%]'>
+    <div className='relative hidden sm:block gap-5 flex-col lg:w-[70%] sm:w-[60%] justify-center items-center m-[1%]'>
       <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
       <div className='w-[90%] px-[3%] flex items-center'>
       <img
             alt=""
             src={image}
-            className="h-16  object-cover rounded-full w-16"
+            className="lg:h-15  object-cover rounded-full lg:w-15 md:h-12 md:w-12 sm:h-11 sm:w-11"
           />
       <div>
-      <p className='w-[90%] text-start p-[1%] text-2xl ml-2 font-bold'>{name}</p>
+      <p className='w-[90%] text-start p-[1%] lg:text-2xl md:text-2xl sm:text-xl ml-2 font-bold'>{name}</p>
       <div className='flex gap-1 ml-2 '>
       {
         length>0?(
           
             users.map((user)=>(
-             <div>
+             <div className=''>
                {user.name},
              </div>
            ))
@@ -172,7 +183,7 @@ function Chatarea() {
         <input 
           type="file" 
           className="hidden" 
-          onChange={(e)=>setFile(e.target.files[0])}
+          onChange={handleFileChange}
         />
       </label>
           
@@ -188,9 +199,14 @@ function Chatarea() {
       
       
     </div>
+    <div className='absolute bottom-[17%] left-[34%] w-[60%] bg-white flex items-center justify-center'>
+    {
+      selectedImage && <img src={selectedImage} alt='' className='h-64 w-64'/>
+    }
+    </div>
     <div className='absolute bottom-[14%] left-[32.5%]'>
       <EmojiPicker open={open} onEmojiClick={handleEmoji}/>
-      </div>
+    </div>
    
     </>
   )

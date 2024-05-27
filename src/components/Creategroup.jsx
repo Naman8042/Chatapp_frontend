@@ -47,7 +47,7 @@ function Creategroup() {
   
   return (
     <>
-    <div className='hidden sm:flex flex-col w-[70%] h-[100%] m-[1%]'>
+    <div className='hidden sm:flex flex-col lg:w-[70%] sm:w-[60%] h-[100%] m-[1%]'>
     <div className='w-[100%] h-[20%] flex flex-col gap-3 justify-end items-center'>
       <input placeholder='Enter Group Name' className='p-[1%] rounded-xl w-[60%]' value={groupName} onChange={(e)=>setGroupName(e.target.value)}/>
       <input placeholder='Search Users'className='p-[1%] rounded-xl w-[60%]' value={findUsers} onChange={(e)=>setFindUsers(e.target.value)}/>

@@ -58,7 +58,7 @@ function Online() {
 
   return (
     <>
-    <div className='hidden sm:block sm:w-[60%] md:w-[70%] h-full m-[1%]'>
+    <div className='hidden sm:block sm:w-[60%] lg:w-[70%] h-full m-[1%]'>
       <div className='md:h-[30%] sm:h-[20%] '>
       <div className='flex '>
       <span className='w-[10%] p-[1%]'><img src={Logo} alt=""/></span>

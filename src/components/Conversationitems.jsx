@@ -31,12 +31,12 @@ function Conversationitems({props}) {
   return (
     
      <>
-     <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] py-[2%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
+     <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] lg:py-[2%] py-[1%]' onClick={()=>{navigate("chat/" , {state:{id:props._id,name:name,length:0,image:image}})}} >
       <div className='w-[20%] rounded-full  '>
       <img
             
             src={image}
-            className="md:h-16 mx-auto object-cover rounded-full sm:w-12 sm:h-12 md:w-16"
+            className="md:h-13 mx-auto object-cover rounded-full sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14"
           />
       </div>
       <div className='w-[80%] px-[3%] flex flex-col justify-center'>

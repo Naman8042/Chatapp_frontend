@@ -2,9 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Conversationitems from './Conversationitems';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {IconButton} from '@mui/material'
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { HiUserAdd } from "react-icons/hi";
+import { MdGroupAdd } from "react-icons/md";
+import { FaPlusCircle } from "react-icons/fa";
 import SearchIcon from '@mui/icons-material/Search';
 import { MdLogout } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
@@ -26,24 +26,28 @@ function Sidebar() {
     }
     get()
     },[data])
+    function Logout(){
+      Cookies.remove('token')
+      navigate('/')
+    }
   return (
-    <div className=' w-full sm:w-[40%] md:w-[30%] cursor-pointer'>
+    <div className=' w-full sm:w-[40%] lg:w-[30%] cursor-pointer'>
       <div className='flex justify-center  px-[5%] py-[3%]  rounded-3xl w-full'>
         <div className='w-[40%] '>
         <img src={image} alt='' className='h-10  object-cover rounded-full w-10'/>
         </div>
         <div className='flex justify-between w-[60%] '>
         <IconButton onClick={()=>{navigate("addusers")}}>
-        <PersonAddIcon />
+        <HiUserAdd className='lg:size-6 md:size-5 sm:size-4'/>
         </IconButton>
         <IconButton onClick={()=>{navigate("create-groups")}}>
-        <GroupAddIcon />
+        <MdGroupAdd className='lg:size-6 md:size-5 sm:size-4'/>
         </IconButton>
         <IconButton onClick={()=>{navigate("users")}}>
-        <AddCircleIcon/>
+        <FaPlusCircle className='lg:size-6 md:size-5 sm:size-4'/>
         </IconButton>
         <IconButton>
-        <MdLogout />
+        <MdLogout onClick={Logout} className='lg:size-6 md:size-5 sm:size-4'/>
         </IconButton>
         </div>
        </div>

@@ -47,7 +47,7 @@ function Login() {
         <br/>
         <input type="text" placeholder='Enter Your Username' value={name} onChange={(e)=>setName(e.target.value)} className='px-[2%] py-[1%] border-2 rounded-md'/>
         <br/>
-        <input type="password" placeholder='Enter Your Password' value={password} onChange={(e)=>setPassword(e.target.value)} className='px-[2%] py-[1%] border-2 rounded-md'/>
+        <input type="text" placeholder='Enter Your Password' value={password} onChange={(e)=>setPassword(e.target.value)} className='px-[2%] py-[1%] border-2 rounded-md'/>
         <div className='w-full flex items-center justify-center my-[5%] sm:my-[2%] ' onClick={Login}>
         <button  className='bg-black rounded-md text-white py-[1%] px-[5%]'>Login</button> 
         </div>   
