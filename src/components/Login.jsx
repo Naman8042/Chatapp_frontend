@@ -1,7 +1,7 @@
 import { useState} from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import Logo from '../assets/Logo.png'
-import { Audio } from 'react-loader-spinner'
+import { toast } from "react-toastify";
 import axios from 'axios'
 import {useNavigate,Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
@@ -25,11 +25,19 @@ function Login() {
     try{
       axios.post("https://chatapp-backend-hj9n.onrender.com/user/login",{name,password})
       .then((res)=>{
-      Cookies.set('token',res.data.token)
+      console.log(res.data)
+      if(res.data.email!==undefined){
+        Cookies.set('token',res.data.token)
       ,localStorage.setItem("id",res.data._id)
       ,localStorage.setItem("image",res.data.imageUrl)
-      
+      setLoader(false)
       navigate("/app/welcome")
+      toast.success("Logged In Successfully")
+      }
+      else{
+        setLoader(false)
+        toast.error("Please Enter Valid Username or Password")
+      }
       })
     }
     catch(err){
