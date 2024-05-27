@@ -39,6 +39,7 @@ function Login() {
         <FaRegUserCircle size={100} color='gray'/> 
       
         <input type='file' className='border-2 hidden' onChange={(e)=>setFile(e.target.files[0])} />
+        <p className='text-lg font-semibold mt-[5%]'>Choose A Photo</p>
         </label>
         <br/>
         <input type="text" placeholder='Enter Your Username' value={name} onChange={(e)=>setName(e.target.value)} className='px-[2%] py-[1%] border-2 rounded-md'/>
