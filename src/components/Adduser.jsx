@@ -31,6 +31,23 @@ function Online() {
    }
   },[])
   const[data,setData] = useState({})
+  const CreateChatPhone = async(userId) =>{
+    try {
+      const token = Cookies.get('token');
+      const response = await axios.post("https://chatapp-backend-hj9n.onrender.com/user/accesschats", {
+        userId: userId,
+        token: token,
+      });
+      const currentUserId = id;
+      const otherUser = await response.data.users.find(user => user._id !== currentUserId);
+
+      if (otherUser) {
+       navigate("/chat", { state: { id: response.data._id, name: otherUser.name, length: 0, image: otherUser.image } });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
   const CreateChat = async (userId) => {
     try {
       const token = Cookies.get('token');
@@ -107,7 +124,7 @@ function Online() {
       <div className='h-[70%] flex flex-col gap-4 items-center py-[2%] overflow-y-scroll'>
       {
             users.map((user)=>(
-                <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChat(user._id)}>
+                <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChatPhone(user._id)}>
                 <div className='w-[20%]'><img src={user.imageUrl} className='md:h-16  w-12 h-12 object-cover rounded-full md:w-16' alt=""/></div>  
                 <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}

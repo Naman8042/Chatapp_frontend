@@ -48,11 +48,11 @@ function Login() {
   }
   return (
     <div className='w-[90%] h-[90%] bg-white flex flex-col sm:flex-row'>
-      <div className='hidden w-[30%] sm:block bg-gray-200 h-[100%]  justify-center items-center'>
+      <div className='hidden w-[20%] sm:w-[30%] sm:block bg-gray-200 h-[100%]  justify-center items-center'>
         <img src={Logo} alt=""/>
       </div>
-      <div className=' w-[100%] sm:w-[70%] flex flex-col justify-center items-center h-screen '>
-        <img src={Logo} alt="" className='sm:hidden w-48 mb-[10%]'/>
+      <div className=' w-[100%]  sm:w-[70%] flex flex-col justify-center items-center sm:h-screen pt-[2%] '>
+        <img src={Logo} alt="" className='sm:hidden w-32 mb-[5%]  '/>
         <p className='w-full text-center font-bold text-xl md:text-2xl'>Signup to your Account</p>
         <br/>
         <div className='w-full flex flex-col justify-center items-center'>
@@ -60,7 +60,7 @@ function Login() {
         {
           imageUrl?(
   
-            <img src={imageUrl} alt='' className='w-32 h-32 rounded-full'/>
+            <img src={imageUrl} alt='' className='sm:w-32 sm:h-32 h-24 w-24 rounded-full '/>
           
           ):(
             <label>

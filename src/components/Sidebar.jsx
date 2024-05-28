@@ -51,12 +51,12 @@ function Sidebar() {
         </IconButton>
         </div>
        </div>
-      <div className=' bg-white flex items-center px-[1%] md:py-[3%] m-[3%] rounded-3xl'>
+      <div className=' bg-white flex items-center py-[1%] m-[3%] rounded-3xl'>
        <IconButton>
        <SearchIcon/> 
        </IconButton>
        <input type='text' placeholder='search'
-       className='b-none text-bg ml-[1%] p-[1%] w-full'
+       className='b-none text-bg ml-[1%] p-[1.5%] w-full rounded-3xl outline-none'
        />
       </div>
       <div className=' bg-white flex overflow-y-auto scrollbar-thin  scrollbar-track-gray-300 h-[72%] flex-col  p-[1%] m-[3%] rounded-3xl'>
