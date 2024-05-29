@@ -55,24 +55,28 @@ function Online() {
         userId: userId,
         token: token,
       });
-
+  
       setData(response.data);
-
+  
       const currentUserId = id;
-      const otherUser = await response.data.users.find(user => user._id !== currentUserId);
-
+      const otherUser = response.data.users.find(user => user._id !== currentUserId);
+  
       if (otherUser) {
-        const { name} = await otherUser;
-        const image = await otherUser.imageUrl;
-        console.log(image)
-        navigate("/app/chat", { state: { id: response.data._id, name: name, length: 0, image: image } });
+        const { name, imageUrl } = otherUser;
+        if (name && imageUrl) {
+          console.log(imageUrl);
+          navigate("/app/chat", { state: { id: response.data._id, name: name, length: 0, image: imageUrl } });
+        } else {
+          console.error("Required user data is missing");
+        }
+      } else {
+        console.error("Other user not found");
       }
     } catch (err) {
       console.error(err);
     }
   };
-
-
+  
   return (
     <>
     <div className='hidden sm:block sm:w-[60%] lg:w-[70%] h-full m-[1%]'>
@@ -95,7 +99,15 @@ function Online() {
         {
             users.map((user)=>(
                 <div className='cursor-pointer flex items-center gap-2 my-[2%] text-xl bg-gray-200 rounded-xl' onClick={()=>CreateChat(user._id)}>
-                <div className='w-[20%]'><img src={user.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+                <div className='w-[20%]'>
+                  {
+                    user.imageUrl?(
+                      <img src={user.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/>
+                    ):(
+                      <img src={Default} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/>
+                    )
+                  }
+                </div>  
                 <div className='w-[70%]'>{user.name}</div>
                 </div>
             ))

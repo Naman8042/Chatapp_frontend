@@ -1,6 +1,5 @@
 import React, { useState , useEffect} from 'react'
-import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded'
-import {IconButton} from '@mui/material'
+import Default from '../assets/default.png'
 import axios from 'axios'
 import Phonenavbar from './Phonenavbar'
 import Cookies from 'js-cookie'
@@ -60,7 +59,15 @@ function Creategroup() {
           user.map((users)=>{
             if(users._id!==localStorage.getItem('id')){
               return <div className='cursor-pointer flex items-center gap-2 my-[2%] text-xl bg-white rounded-xl w-full ' onClick={()=>Adduser(users._id)}>
-              <div className='w-[30%]'><img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/></div>  
+              <div className='w-[30%]'>
+                {
+                  users.imageUrl!==null?(
+                    <img src={users.imageUrl} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/>
+                  ):(
+                    <img src={Default} className='h-16 mx-auto object-cover rounded-full w-16' alt=""/>
+                  )
+                }
+              </div>  
               <div className='w-[70%]'>{users.name}</div>
           </div>
             }

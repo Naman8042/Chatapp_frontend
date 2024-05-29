@@ -9,8 +9,6 @@ function Conversationitems({props}) {
   var content="Start a New Chat";
   const navigate = useNavigate()
 
-  
-
   if(props.latestMessage!==undefined){
     if(props.latestMessage.content.length<30){
       content = props.latestMessage.content
@@ -22,11 +20,21 @@ function Conversationitems({props}) {
   }
   if(id===props.users[0]._id){
     name = props.users[1].name
-    image = props.users[1].imageUrl
-  }
+    if(props.users[1].imageUrl!==null){
+      image = props.users[1].imageUrl
+    }
+    else{
+      image = Default
+    }
+    }
   else{
     name = props.users[0].name
-    image = props.users[0].imageUrl
+    if(props.users[0].imageUrl!==null){
+      image = props.users[0].imageUrl
+    }
+    else{
+      image = Default
+    }
   }
   return (
     
