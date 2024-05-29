@@ -23,7 +23,7 @@ function Login() {
         }})
       .then(res=>{
       console.log(res)
-      if(res.data.success){
+      if(res.data.success===true){
       setFile(null)
       toast.success("Signup Successfully")
       navigate("/")
