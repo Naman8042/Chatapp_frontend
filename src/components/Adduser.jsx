@@ -7,6 +7,7 @@ import Default from '../assets/default.png'
 import Phonenavbar from './Phonenavbar'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 
 function Online() {
@@ -40,9 +41,9 @@ function Online() {
       });
       const currentUserId = id;
       const otherUser = await response.data.users.find(user => user._id !== currentUserId);
-
+      console.log(response)
       if (otherUser) {
-       navigate("/chat", { state: { id: response.data._id, name: otherUser.name, length: 0, image: otherUser.image } });
+       navigate("/chat", { state: { id: response.data._id, name: otherUser.name, length: 0, image: otherUser.imageUrl } });
       }
     } catch (err) {
       console.error(err);
@@ -55,12 +56,12 @@ function Online() {
         userId: userId,
         token: token,
       });
-  
+      toast.success("User Added Successfully")
       setData(response.data);
   
       const currentUserId = id;
       const otherUser = response.data.users.find(user => user._id !== currentUserId);
-  
+       
       if (otherUser) {
         const { name, imageUrl } = otherUser;
         if (name && imageUrl) {
@@ -137,7 +138,15 @@ function Online() {
       {
             users.map((user)=>(
                 <div className='flex h-[20%] w-[93%] items-center bg-white rounded-xl' onClick={()=>CreateChatPhone(user._id)}>
-                <div className='w-[20%]'><img src={user.imageUrl} className='md:h-16  w-12 h-12 object-cover rounded-full md:w-16' alt=""/></div>  
+                <div className='w-[20%]'>
+                  {
+                    user.imageUrl?(
+                      <img src={user.imageUrl} className='md:h-16  w-12 h-12  rounded-full md:w-16' alt=""/>
+                    ):(
+                      <img src={Default} className='md:h-16  w-12 h-12  rounded-full md:w-16' alt=""/>
+                    )
+                  }
+                </div>  
                 <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
                 {/* <button className='w-[80%]' onClick={()=>CreateChat(user._id)}>Send Message</button> */}
                 </div>

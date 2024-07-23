@@ -19,6 +19,7 @@ function Sidebar() {
 
     const navigate = useNavigate()
     const[data,setData] = useState([]);
+    
     useEffect(()=>{
     async function get(){
     await axios.post("https://chatapp-backend-hj9n.onrender.com/user/fetchchats",{token :Cookies.get("token")})

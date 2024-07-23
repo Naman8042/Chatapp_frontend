@@ -148,11 +148,14 @@ const Phonechat = () => {
       <IoMdSend size={30} color='white' />
       </IconButton>
       </div>
+      {
+      selectedImage && 
       <div className='absolute bottom-[13%] border-8 w-full bg-white  flex items-center justify-center'>
-    {
-      selectedImage && <img src={selectedImage} alt='' className='h-64 w-64'/>
-    }
-    </div>
+
+      <img src={selectedImage} alt='' className='h-64 w-64'/>
+      </div>
+     }
+ 
       <div className='absolute bottom-20 left-5'>
       <EmojiPicker open={open} onEmojiClick={handleEmoji} width={300}/>
       </div>  
