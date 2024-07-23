@@ -44,7 +44,7 @@ function Conversationitems({props}) {
       <img
             
             src={image}
-            className="md:h-13 mx-auto rounded-full sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14"
+            className=" mx-auto rounded-full sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14"
           />
       </div>
       <div className='w-[80%] px-[3%] flex flex-col justify-center'>
@@ -57,7 +57,7 @@ function Conversationitems({props}) {
       <img
             alt="n"
             src={image}
-            className="h-16 mx-auto  rounded-full w-16"
+            className="h-14 mx-auto  rounded-full w-14"
           />
       </div>
       <div className='w-[70%] px-[3%] flex flex-col justify-center'>

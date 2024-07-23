@@ -120,12 +120,12 @@ function Chatarea() {
   return (
     <>
     <div className='relative hidden sm:block gap-5 flex-col lg:w-[70%] sm:w-[60%] justify-center items-center m-[1%]'>
-      <div className=' h-[10%] w-[100%] flex bg-white rounded-xl'>
-      <div className='w-[90%] px-[3%] flex items-center'>
+      <div className=' h-[10%] w-[100%] flex justify-between bg-white rounded-xl'>
+      <div className='px-[3%] flex items-center'>
       <img
             alt=""
             src={image}
-            className="lg:h-15  object-cover rounded-full lg:w-15 md:h-12 md:w-12 sm:h-11 sm:w-11"
+            className="mx-auto rounded-full sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14"
           />
       <div>
       <p className='w-[90%] text-start p-[1%] lg:text-2xl md:text-2xl sm:text-xl ml-2 font-bold'>{name}</p>
