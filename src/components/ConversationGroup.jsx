@@ -31,7 +31,7 @@ function Conversationitems({props}) {
       <img
             
             src={Default}
-            className="h-16 mx-auto object-cover rounded-full w-16"
+            className="sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14 mx-auto object-cover rounded-full w-16"
           />
       </div>
       <div className='w-[80%] px-[3%] flex flex-col justify-center'>
@@ -40,7 +40,8 @@ function Conversationitems({props}) {
       </div>
       </div>
       <div className='flex sm:hidden bg-gray-100 rounded-xl w-[100%] my-[0.5%] items-center ' onClick={()=>{navigate("/groupchat" , {state:{id:props._id,name:props.chatName,users:users,length:length}})}} >
-      <div className='w-[30%]'><img src={Default} className='w-[100%]' alt=""/></div>
+      <div className='w-[30%]'>
+      <img src={Default} className='h-14 mx-auto  rounded-full w-14' alt=""/></div>
       <div className='w-[70%] px-[3%]'>
       <p className='text-lg font-semibold'>{props.chatName}</p>
       <p className='text-sm'>{content}</p>

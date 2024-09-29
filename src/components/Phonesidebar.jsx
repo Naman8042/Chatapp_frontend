@@ -24,7 +24,7 @@ function Sidebar() {
     get()
     },[data])
   return (
-    <div className='h-screen overflow-x-hidden overflow-y-hidden py-[2%] w-screen px-[2%]'>
+    <div className='h-dvh overflow-x-hidden overflow-y-hidden py-[2%] w-screen px-[2%]'>
       <div className='h-[12%] overflow-x-hidden flex justify-center items-center'>
       <Phonenavbar/> 
       </div>

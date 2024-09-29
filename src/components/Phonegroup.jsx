@@ -80,7 +80,7 @@ const Phonechat = () => {
   }
 
   return (
-    <div className=' hidden w-[95%]  bg-white pb-[4%] sm:w-[30%] h-screen  p-[0.25%]  flex-col items-center '>
+    <div className=' sm:hidden w-[95%]  bg-white pb-[4%] sm:w-[30%] h-dvh  p-[0.25%]  flex-col items-center '>
       <div className=' h-[90%] w-[100%] rounded-xl overflow-y-scroll overflow-x-hidden'>
         <div className='mb-[4%] fixed top w-[95%] bg-white border-b-2 flex justify-center items-center p-[1%]'>
           <div className='w-[20%]'>
@@ -91,8 +91,8 @@ const Phonechat = () => {
           <p className='w-[80%] sm:text-start p-[1%] text-2xl text-center '>{name}</p>
           <div className='flex ml-2 gap-1'>
             {
-                users.map((user)=>(
-                    <div>{user.name},</div>
+                users.map((user,index)=>(
+                    <div key={index}>{user.name},</div>
                 ))
             }
           </div>
