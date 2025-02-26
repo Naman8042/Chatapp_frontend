@@ -4,10 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#32CD32',  // LimeGreen
+        secondary: '#7bbb7e', // ForestGreen
+        background: '#d3d3d3' // LightGray
+      },
+    },
   },
-  plugins: [
-    require('tailwind-scrollbar'),
-  ],
+  plugins: [],
 }
