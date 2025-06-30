@@ -7,7 +7,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Conversationgroup from "../components/Conversationgroup";
+import Conversationgroup from "./ConversationGroup";
 import Cookies from "js-cookie";
 import { BASE_URL } from "../data";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
