@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Conversationitems from "./Conversationitems";
 import { IconButton } from "@mui/material";
 import { HiUserAdd } from "react-icons/hi";
-import { MdGroupAdd, MdLogout } from "react-icons/md";
+import { MdGroupAdd } from "react-icons/md";
 import { FaPlusCircle } from "react-icons/fa";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
@@ -10,12 +10,7 @@ import axios from "axios";
 import Conversationgroup from "../components/Conversationgroup";
 import Cookies from "js-cookie";
 import { BASE_URL } from "../data";
-import { io } from "socket.io-client";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import socket from "../components/Socket";
-
-
-
 
 const Sidebar = () => {
   const [id, setId] = useState("");
@@ -25,28 +20,49 @@ const Sidebar = () => {
   const [data, setData] = useState([]);
   const [newMessageReceived, setNewMessageReceived] = useState(false);
 
+  const ws = useRef(null);
 
+  // WebSocket initialization
   useEffect(() => {
-    socket.on("sidebar", () => {
-      setNewMessageReceived(true);
-    });
-    socket.on("newuser", () => {
-      setNewMessageReceived(true);
-    });
+    ws.current = new WebSocket("ws://localhost:5000"); // Replace with your backend WebSocket port
+
+    ws.current.onopen = () => {
+      console.log("WebSocket connected (sidebar)");
+    };
+
+    ws.current.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      if (msg.type === "sidebar" || msg.type === "newuser") {
+        setNewMessageReceived(true);
+      }
+    };
+
+    ws.current.onclose = () => {
+      console.log("WebSocket disconnected (sidebar)");
+    };
+
+    return () => {
+      if (ws.current) {
+        ws.current.close();
+      }
+    };
   }, []);
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const { data } = await axios.post(`${BASE_URL}/user/getmydetails`, {}, { withCredentials: true })
-        setImage(data.imageUrl)
+        const { data } = await axios.post(
+          `${BASE_URL}/user/getmydetails`,
+          {},
+          { withCredentials: true }
+        );
+        setImage(data.imageUrl);
+      } catch (err) {
+        console.log(err);
       }
-      catch (err) {
-        console.log(err)
-      }
-    }
-    fetchDetails()
-  }, [])
+    };
+    fetchDetails();
+  }, []);
 
   const fetchChats = async () => {
     try {
@@ -62,12 +78,13 @@ const Sidebar = () => {
   };
 
   const filteredChats = data.filter((chat) =>
-    chat.users.some((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    chat.users.some((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
   const fetchAllUsers = async () => {
     const users = await fetchChats();
-    console.log(users)
     setData(users);
   };
 
@@ -162,10 +179,8 @@ const Sidebar = () => {
           )}
         </div>
       </div>
-
     </>
   );
 };
 
 export default Sidebar;
-

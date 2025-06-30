@@ -7,13 +7,11 @@ import Default from "../assets/default.png";
 import { FaRegImage } from "react-icons/fa";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from "axios";
-import { io } from "socket.io-client";
 import { FaClock } from "react-icons/fa";
 import EmojiPicker from "emoji-picker-react";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../data";
-import socket from "../components/Socket";
 import { toast } from "react-toastify";
 
 function App() {
@@ -21,7 +19,6 @@ function App() {
   const [image, setImage] = useState("");
   const { id } = useParams();
   const senderId = localStorage.getItem("id");
-  console.log("senderId", senderId);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -31,17 +28,16 @@ function App() {
   const [imagePreview, setImagePreview] = useState(null);
   const [users, setUsers] = useState([]);
   const [disappear, setDisappear] = useState(false);
+  const ws = useRef(null); // WebSocket ref
 
   function disappearHandler() {
     setDisappear(!disappear);
-    if(!disappear){
+    if (!disappear) {
       toast.success("The Message will be deleted in 24 hours");
-    }
-    else{
+    } else {
       toast.success("This is a Normal Message");
     }
   }
-
 
   async function getDetails() {
     setUsers([]);
@@ -81,7 +77,6 @@ function App() {
       { chatId: id },
       { withCredentials: true }
     );
-    console.log(data);
     if (data) {
       getGroupDetails();
     } else {
@@ -91,7 +86,6 @@ function App() {
 
   useEffect(() => {
     findIsGroup();
-    // getDetails()
   }, [id]);
 
   useEffect(() => {
@@ -110,74 +104,94 @@ function App() {
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
     setFile(file);
     const reader = new FileReader();
     reader.onload = () => {
-      setImagePreview(reader.result); // Base64 image URL
+      setImagePreview(reader.result);
     };
     reader.readAsDataURL(file);
   };
 
   useEffect(() => {
-    socket.on("connected", () => {
-      setConnected(true);
-      console.log("Connected to server");
-    });
+    ws.current = new WebSocket(BASE_URL);
 
-    socket.on("message received", (newMessageStatus) => {
-      if (newMessageStatus.chat == id) {
-        setMessages((prevMessages) => [...prevMessages, newMessageStatus]);
+    ws.current.onopen = () => {
+      console.log("WebSocket connected");
+      setConnected(true);
+      ws.current.send(
+        JSON.stringify({ type: "setup", user: senderId })
+      );
+      ws.current.send(
+        JSON.stringify({ type: "join_chat", room: id })
+      );
+    };
+
+    ws.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "connected") {
+        console.log("Connected to WebSocket server");
+      } else if (data.type === "message_received") {
+        const newMessageStatus = data.message;
+        
+        if (newMessageStatus.chat === id) {
+          console.log("new Message Recieved",newMessageStatus)
+          setMessages((prevMessages) => [...prevMessages, newMessageStatus]);
+        }
+      } else if (data.type === "sidebar") {
+        console.log("Sidebar update received");
+      } else if (data.type === "newuser") {
+        console.log("New user connected");
       }
-    });
+    };
+
+    ws.current.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
 
     return () => {
-      socket.off("connected");
-      socket.off("message received");
+      ws.current.close();
     };
-  }, []);
-
-  useEffect(() => {
-    if (senderId && id) {
-      socket.emit("setup", senderId); // Setup user connection
-      socket.emit("join chat", id); // Join the specified chat room
-      console.log(`${senderId} joined room ${id}`);
-    }
   }, [id]);
 
-  const handleJoinRoom = () => {};
-
-  // Send message
   const sendMessage = async () => {
-    const formData = new FormData(); // FormData to handle files
-    formData.append("sender", senderId); // Add sender ID
-    formData.append("chatId", id); // Add chat ID
-    formData.append("content", message); // Add message content
+    const formData = new FormData();
+    formData.append("sender", senderId);
+    formData.append("chatId", id);
+    formData.append("content", message);
     if (file) {
-      formData.append("file", file); // Add image file if it exists
+      formData.append("file", file);
     }
     if (disappear) {
       formData.append("expiresIn", 10);
     }
 
     try {
-      // Send the message data to the server
       const { data } = await axios.post(
         `${BASE_URL}/user/sendmessage`,
         formData,
         {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" }, // Specify content type
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
-      // Emit the message event to the socket server
-      socket.emit("new message", data, id); // Sending message data with chat ID
-      socket.emit("sidebar");
+      // Send to server via WebSocket
+      ws.current.send(
+        JSON.stringify({
+          type: "new_message",
+          newMessageStatus: data,
+          roomId: id,
+        })
+      );
 
-      // Update the local messages list
+      ws.current.send(
+        JSON.stringify({
+          type: "sidebar",
+        })
+      );
+
       setMessages((prevMessages) => [...prevMessages, data]);
-      setMessage(""); // Clear the input
+      setMessage("");
       setFile("");
       setImagePreview(null);
       setDisappear(false);
@@ -190,12 +204,9 @@ function App() {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/user/allmessage`,
-        {
-          chat: id,
-        },
+        { chat: id },
         { withCredentials: true }
       );
-      console.log(data);
       setMessages(data);
     } catch (err) {
       console.error("Error fetching messages", err);
@@ -205,6 +216,7 @@ function App() {
   useEffect(() => {
     fetchChats();
   }, [id]);
+
 
   return (
     <>

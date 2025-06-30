@@ -1,1 +1,1 @@
-export const BASE_URL = "http://localhost:5000"
+export const BASE_URL = "https://chatapp-backend-hj9n.onrender.com/"
