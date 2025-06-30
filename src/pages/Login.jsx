@@ -3,7 +3,7 @@ import Logo from "../assets/Logo.png";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { BASE_URL } from "../data";
+import { BASE_URL ,FRONTEND_URL} from "../data";
 
 function Login() {
   return (
@@ -38,7 +38,7 @@ const LeftPart = () => {
         localStorage.setItem("id", data._id),
         localStorage.setItem("image", data.imageUrl);
         setLoader(false);
-        navigate("/app/welcome");
+        navigate(`${FRONTEND_URL}/app/welcome`);
         toast.success("Logged In Successfully");
       } else {
         setLoader(false);
