@@ -30,7 +30,7 @@ function Messageother({ props }) {
               <MdGTranslate
                 onClick={onClick}
                 size={20}
-                className='absolute right-[-30px] hidden group-hover:flex items-center'
+                className='absolute right-[-30px] hidden group-hover:flex items-center text-black'
               />
               <p className='text-sm font-semibold md:text-base'>{message}</p>
             </div>

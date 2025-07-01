@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   // WebSocket initialization
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:5000"); // Replace with your backend WebSocket port
+    ws.current = new WebSocket(BASE_URL); // Replace with your backend WebSocket port
 
     ws.current.onopen = () => {
       console.log("WebSocket connected (sidebar)");
