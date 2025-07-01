@@ -38,7 +38,7 @@ const LeftPart = () => {
         localStorage.setItem("id", data._id),
         localStorage.setItem("image", data.imageUrl);
         setLoader(false);
-        navigate(`${FRONTEND_URL}/app/welcome`);
+        navigate(`/app/welcome`);
         toast.success("Logged In Successfully");
       } else {
         setLoader(false);
