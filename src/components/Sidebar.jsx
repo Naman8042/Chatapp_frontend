@@ -13,7 +13,6 @@ import { BASE_URL } from "../data";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 
 const Sidebar = () => {
-  const [id, setId] = useState("");
   const [image, setImage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -90,7 +89,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchAllUsers();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     if (newMessageReceived) {
@@ -106,7 +105,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="w-full md:w-[40%] lg:w-[30%] cursor-pointer p-2 ">
+      <div className="w-full sm:w-[50%] md:w-[40%] lg:w-[30%] cursor-pointer p-2 ">
         <div className="flex justify-center px-[5%] py-[3%] rounded-3xl w-full">
           <div className="w-[40%] ">
             <img src={image} alt="User" className="h-10 rounded-full w-10 " />
@@ -141,7 +140,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="bg-white flex items-center p-1 my-4 rounded-full border-2">
+        <div className="bg-white flex items-center md:p-1 my-4 rounded-3xl border-2">
           <IconButton>
             <SearchIcon />
           </IconButton>
@@ -149,7 +148,7 @@ const Sidebar = () => {
             type="text"
             placeholder="Search any user"
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="b-none text-bg ml-[1%]  w-full rounded-r-full h-full outline-none  "
+            className="b-none text-bg ml-[1%]  w-full sm:text-base lg:text-lg rounded-r-full h-full outline-none  "
           />
         </div>
 

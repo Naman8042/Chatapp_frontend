@@ -92,104 +92,48 @@ function Online() {
   };
 
   return (
-    <>
-      <div className='hidden sm:block sm:w-[60%] lg:w-[70%] h-full m-[1%]'>
-        <div className='md:h-[30%] sm:h-[20%] '>
-          <div className='flex '>
-            <span className='w-[10%] p-[1%]'><img src={Logo} alt="" /></span>
-            <p className='w-[90%] flex items-center text-2xl'>Add Users</p>
-          </div>
-          <div className='bg-white flex items-center px-[1%] py-[1%] m-[3%] rounded-3xl'>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-            <input
-              type='text'
-              placeholder='Search Any User'
-              className='b-none text-bg ml-[1%] p-[1%] w-full outline-none'
-              value={findUsers}
-              onChange={(e) => setFindUsers(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className='sm:h-[70%] md:h-[65%] overflow-y-scroll px-[10%] '>
-          {users.map((user) => (
-            <div
-              key={user._id}
-              className='cursor-pointer flex items-center gap-2 my-[2%] text-xl bg-gray-100 border-2 shadow-lg rounded-xl'
-              onClick={() => CreateChat(user._id)}
-            >
-              <div className='w-[20%]'>
-                {user.imageUrl ? (
-                  <img
-                    src={user.imageUrl}
-                    className='h-16 mx-auto p-1 rounded-full w-16'
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    src={Default}
-                    className='h-16 mx-auto object-cover rounded-full w-16'
-                    alt=""
-                  />
-                )}
-              </div>
-              <div className='w-[70%]'>{user.name}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="w-full sm:w-[60%] lg:w-[70%] h-full m-2">
+  <div className="h-[30%] p-2">
+    {/* Header */}
+    <div className="flex items-center gap-4">
+      <img src={Logo} alt="Logo" className="w-16 h-16 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain" />
+      <p className="text-xl sm:text-2xl font-bold">Add Users</p>
+    </div>
 
-      {/* Phone view */}
-      <div className='w-screen block sm:hidden h-screen'>
-        <div className='h-[30%]'>
-          <div className='flex '>
-            <span className='w-[50%] p-[1%]'>
-              <img src={Logo} alt="" className='w-24 h-24' />
-            </span>
-            <p className='w-[50%] flex items-center text-2xl text-start'>Add Users</p>
-          </div>
-          <div className='bg-white flex items-center px-[1%] py-[1%] m-[3%] rounded-3xl'>
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-            <input
-              type='text'
-              placeholder='search'
-              className='b-none text-bg ml-[1%] p-[1%] w-full outline-none'
-              value={findUsers}
-              onChange={(e) => setFindUsers(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className='h-[70%] flex flex-col gap-4 items-center py-[2%] overflow-y-scroll'>
-          {users.map((user) => (
-            <div
-              key={user._id}
-              className='flex h-[20%] w-[93%] items-center bg-white rounded-xl'
-              onClick={() => CreateChat(user._id)}
-            >
-              <div className='w-[20%]'>
-                {user.imageUrl ? (
-                  <img
-                    src={user.imageUrl}
-                    className='md:h-16 w-12 h-12 rounded-full md:w-16'
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    src={Default}
-                    className='md:h-16 w-12 h-12 rounded-full md:w-16'
-                    alt=""
-                  />
-                )}
-              </div>
-              <div className='w-[80%] text-xl font-semibold text-center'>{user.name}</div>
-            </div>
-          ))}
-        </div>
+    {/* Search Bar */}
+    <div className="bg-white flex items-center px-3 py-2 mt-4 rounded-3xl shadow-sm">
+      <IconButton>
+        <SearchIcon />
+      </IconButton>
+      <input
+        type="text"
+        placeholder="Search any user"
+        className="ml-2 w-full outline-none text-base"
+        value={findUsers}
+        onChange={(e) => setFindUsers(e.target.value)}
+      />
+    </div>
+  </div>
+
+  {/* User List */}
+  <div className="h-[70%] overflow-y-scroll px-4 space-y-3 pb-4">
+    {users.map((user) => (
+      <div
+        key={user._id}
+        className="flex items-center gap-3 bg-gray-50 border shadow rounded-xl p-2 cursor-pointer hover:bg-gray-100 transition-all"
+        onClick={() => CreateChat(user._id)}
+      >
+        <img
+          src={user.imageUrl || Default}
+          alt="User"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full "
+        />
+        <div className="flex-1 text-base sm:text-lg font-medium truncate">{user.name}</div>
       </div>
-    </>
+    ))}
+  </div>
+</div>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import Default from "../assets/default.png";
 function Conversationitems({ props }) {
@@ -39,15 +39,15 @@ function Conversationitems({ props }) {
           });
         }}
       >
-        <div className="w-[20%] rounded-full  ">
+        <div className="w-[20%] flex items-center">
           <img
             src={Default}
-            className="sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14 mx-auto object-cover rounded-full w-16"
+            className=" md:w-13 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-14 lg:h-14 mx-auto object-cover rounded-full w-16"
           />
         </div>
         <div className="w-[80%] px-[3%] flex flex-col justify-center">
-          <p className="text-lg font-semibold">{props.chatName}</p>
-          <p className="text-sm">{content}</p>
+          <p className='sm:text-base lg:text-lg font-semibold'>{props.chatName}</p>
+          <p className='sm:text-xs lg:text-sm'>{content}</p>
         </div>
       </div>
       <div

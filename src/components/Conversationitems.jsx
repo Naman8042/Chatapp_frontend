@@ -47,16 +47,16 @@ function Conversationitems({ props }) {
 
     <>
       <div className='hidden sm:flex bg-gray-100 rounded-xl w-[100%] my-[0.5%] lg:py-[2%] py-[1%]' onClick={() => { navigate(`chat/${props._id}`, { state: { id: props._id, name: name, length: 0, image: image } }) }} >
-        <div className='w-[20%] rounded-full  '>
+        <div className='w-[20%] rounded-full  flex items-center'>
           <img
 
             src={image}
-            className=" mx-auto rounded-full sm:w-12 sm:h-12 md:w-13 lg:w-14 lg:h-14"
+            className=" mx-auto rounded-full sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-14 lg:h-14"
           />
         </div>
-        <div className='w-[80%] px-[3%] flex flex-col justify-center'>
-          <p className='text-lg font-semibold'>{name}</p>
-          <p className='text-sm'>{content}</p>
+        <div className='w-[80%] px-[3%] flex flex-col justify-center '>
+          <p className='sm:text-base lg:text-lg font-semibold'>{name}</p>
+          <p className='sm:text-xs lg:text-sm'>{content}</p>
         </div>
       </div>
       <div className='flex sm:hidden bg-gray-100 rounded-xl  w-[100%] my-[0.5%]' onClick={() => { navigate(`/chat/${props._id}`, { state: { id: props._id, name: name, length: 0, image: image } }) }} >
