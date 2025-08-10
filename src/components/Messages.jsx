@@ -34,20 +34,22 @@ function Message({ props, isSelf }) {
             isSelf ? "justify-end" : "justify-start"
           } my-2`}
         >
-          <div className="group relative max-w-[80%] sm:max-w-[70%] md:max-w-[60%] ">
-            <div
-              className={`rounded-xl p-3 text-white text-sm md:text-base font-medium break-words bg-green-500`}
-            >
-              <MdGTranslate
-                onClick={onClickTranslate}
-                size={20}
-                className={`absolute top-1/2 transform  -translate-y-1/2 cursor-pointer text-black
-          ${
-            isSelf ? "left-[-28px]" : "right-[-28px]"
-          } hidden group-hover:block`}
-              />
+          <div className="group relative max-w-[80%] sm:max-w-[70%] md:max-w-[60%] px-8">
+            {/* Message bubble */}
+            <div className="rounded-xl p-3 text-white text-sm md:text-base font-medium break-words bg-green-500 w-full">
               <p>{message}</p>
             </div>
+
+            {/* Translate icon */}
+            <MdGTranslate
+              onClick={onClickTranslate}
+              size={20}
+              className={`
+      absolute top-1/2 -translate-y-1/2 text-black cursor-pointer
+      ${isSelf ? "left-1" : "right-1"}
+      hidden group-hover:block
+    `}
+            />
           </div>
         </div>
       ) : (
